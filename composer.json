@@ -1,0 +1,52 @@
+{
+	"name": "webdevstudios/mapbox-for-wp",
+	"version": "1.0.0",
+	"description": "",
+	"authors": [
+		{
+			"name": "WebDevStudios",
+			"email": "contact@webdevstudios.com"
+		}
+	],
+	"homepage": "https://pluginize.com/",
+	"license": "GPL-2.0-or-later",
+	"keywords": [],
+	"type": "wordpress-plugin",
+	"require": {
+		"webdevstudios/edd-sl-plugin-updater": "1.9.1"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"wp-coding-standards/wpcs": "^2.3"
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/WebDevStudios/EDD_SL_Plugin_Updater.git"
+		}
+	],
+	"extra": {
+		"strauss": {
+			"target_directory": "vendor_prefixed",
+			"namespace_prefix": "WebDevStudios\\MB4WP\\",
+			"classmap_prefix": "MB4WP_",
+			"constant_prefix": "MB4WP_",
+			"namespace_replacement_patterns": {},
+			"delete_vendor_files": false
+		}
+	},
+	"autoload": {
+		"classmap": [
+			"includes/"
+		]
+	},
+	"config": {
+		"platform": {
+			"php": "7.4"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
