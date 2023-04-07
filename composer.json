@@ -29,9 +29,9 @@
 	"extra": {
 		"strauss": {
 			"target_directory": "vendor_prefixed",
-			"namespace_prefix": "WebDevStudios\\MB4WP\\",
-			"classmap_prefix": "MB4WP_",
-			"constant_prefix": "MB4WP_",
+			"namespace_prefix": "WebDevStudios\\MBWP\\",
+			"classmap_prefix": "MBWP_",
+			"constant_prefix": "MBWP_",
 			"namespace_replacement_patterns": {},
 			"delete_vendor_files": false
 		}
