@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "create-block/mapbox-for-wp",
+	"name": "webdevstudios/mapbox-for-wp",
 	"version": "0.1.0",
-	"title": "Mapbox For Wp",
+	"title": "Mapbox For WP",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "Embed Mapbox maps in WordPress.",
 	"supports": {
 		"html": false
 	},

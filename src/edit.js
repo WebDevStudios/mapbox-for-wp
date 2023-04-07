@@ -32,7 +32,7 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Mapbox For Wp – hello from the editor!', 'mapbox-for-wp' ) }
+			{ __( 'Mapbox For WP – hello from the editor!', 'mapbox-for-wp' ) }
 		</p>
 	);
 }
