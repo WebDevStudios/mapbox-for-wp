@@ -2,11 +2,11 @@
 /**
  * Settings Class file
  *
- * @package WebDevStudios\MB4WP
+ * @package WebDevStudios\MBWP
  * @since   1.0.0
  */
 
-namespace WebDevStudios\MB4WP\Admin;
+namespace WebDevStudios\MBWP\Admin;
 
 /**
  * Class Settings
@@ -20,21 +20,21 @@ class Settings {
 	 *
 	 * @var string
 	 */
-	private string $slug = 'mb4wp';
+	private string $slug = 'mapbox-for-wp';
 
 	/**
 	 * Option group slug.
 	 *
 	 * @var string
 	 */
-	private string $option_group = 'mb4wp';
+	private string $option_group = 'mapbox-for-wp';
 
 	/**
 	 * Option group section.
 	 *
 	 * @var string
 	 */
-	private string $section = 'mb4wp';
+	private string $section = 'general';
 
 	/**
 	 * Minimum capability needed to interact with our options.
@@ -101,6 +101,6 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function display_page() {
-		require_once MB4WP_PATH . 'includes/admin/partials/settings.php';
+		require_once MBWP_PATH . 'includes/admin/partials/settings.php';
 	}
 }
