@@ -2,28 +2,28 @@
 /**
  * Plugin class factory.
  *
- * @package WebDevStudios\MB4WP
+ * @package WebDevStudios\MBWP
  */
 
-namespace WebDevStudios\MB4WP;
+namespace WebDevStudios\MBWP;
 
-class MB4WP_Factory {
+class MBWP_Factory {
 
 	/**
-	 * Create and return a shared instance of the MB4WP
+	 * Create and return a shared instance of the MBWP
 	 * .
-	 * @return MB4WP The shared plugin instance.
+	 * @return MBWP The shared plugin instance.
 	 * @since  1.0.0
 	 * @author WebDevStudios <contact@webdevstudios.com>
 	 */
-	public static function create(): MB4WP {
+	public static function create(): MBWP {
 
 		/**
 		 * The static instance to share, else null.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @var null|MB4WP $plugin
+		 * @var null|MBWP $plugin
 		 */
 		static $plugin = null;
 
@@ -31,7 +31,7 @@ class MB4WP_Factory {
 			return $plugin;
 		}
 
-		$plugin = new MB4WP();
+		$plugin = new MBWP();
 
 		return $plugin;
 	}

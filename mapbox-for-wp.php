@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Mapbox For Wp
+ * Plugin Name:       Mapbox For WP
  * Description:       Integrate your maps from Mapbox in to WordPress.
  * Requires at least: 6.2
  * Requires PHP:      7.4
@@ -12,23 +12,23 @@
  * Text Domain:       mapbox-for-wp
  */
 
-namespace WebDevStudios\MB4WP;
+namespace WebDevStudios\MBWP;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'MB4WP_VERSION', '0.1.0' );
-define( 'MB4WP_BASENAME', plugin_basename( __FILE__ ) );
-define( 'MB4WP_URL', plugin_dir_url( __FILE__ ) );
-define( 'MB4WP_PATH', plugin_dir_path( __FILE__ ) );
-define( 'MB4WP_FILE', __FILE__ );
-define( 'MB4WP_DIR', __DIR__ );
+define( 'MBWP_VERSION', '0.1.0' );
+define( 'MBWP_BASENAME', plugin_basename( __FILE__ ) );
+define( 'MBWP_URL', plugin_dir_url( __FILE__ ) );
+define( 'MBWP_PATH', plugin_dir_path( __FILE__ ) );
+define( 'MBWP_FILE', __FILE__ );
+define( 'MBWP_DIR', __DIR__ );
 
 require_once 'vendor/autoload.php';
 
-$mb4wp = MB4WP_Factory::create();
-$mb4wp->do_hooks();
+$mbwp = MBWP_Factory::create();
+$mbwp->do_hooks();
 
 function create_block_mapbox_for_wp_block_init() {
 	register_block_type( __DIR__ . '/build' );

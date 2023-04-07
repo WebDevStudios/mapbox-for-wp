@@ -1,15 +1,15 @@
 <?php
 
-namespace WebDevStudios\MB4WP;
+namespace WebDevStudios\MBWP;
 
-use WebDevStudios\MB4WP\Admin\Settings;
+use WebDevStudios\MBWP\Admin\Settings;
 
 /**
- * Class MB4WP
+ * Class MBWP
  *
  * @since 1.0.0
  */
-final class MB4WP {
+final class MBWP {
 
 	/**
 	 * Settings instance.
@@ -27,7 +27,7 @@ final class MB4WP {
 
 		add_action( 'init', [ $this, 'load_classes' ] );
 
-		do_action( 'mb4wp_loaded' );
+		do_action( 'mbwp_loaded' );
 	}
 
 	/**
