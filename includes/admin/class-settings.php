@@ -44,12 +44,22 @@ class Settings {
 	private string $capability = 'manage_options';
 
 	/**
+	 * Array of our available options.
+	 *
+	 * @var array
+	 */
+	private array $options;
+
+	/**
 	 * Constructor
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		add_option( 'mbwp_public_token', '' );
+		add_option( 'mbwp_default_style', '' );
 
+		$this->options = $this->set_options();
 	}
 
 	/**
@@ -63,13 +73,27 @@ class Settings {
 	}
 
 	/**
+	 * Fetch and assign our options property for easy access.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	private function set_options() {
+		return [
+			'public_token'  => get_option( 'mbwp_public_token' ),
+			'default_style' => get_option( 'mbwp_default_style' ),
+		];
+	}
+
+	/**
 	 * Add our menu.
 	 *
 	 * @since 1.0.0
 	 */
 	public function add_page() {
 		add_menu_page(
-			esc_html__( 'Mapbox for WP', 'mapbox-for-wp' ),
+			esc_html__( 'Mapbox for WP Settings', 'mapbox-for-wp' ),
 			esc_html__( 'Mapbox for WP', 'mapbox-for-wp' ),
 			$this->capability,
 			$this->slug,
@@ -92,7 +116,117 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	private function add_section() {
+		add_settings_section(
+			$this->section,
+			esc_html__( 'General', 'mapbox-for-wp' ),
+			[ $this, 'settings_callback' ],
+			$this->slug
+		);
 
+		/*
+		 * Mapbox Public Token
+		 */
+		add_settings_field(
+			'mbwp_public_token',
+			esc_html__( 'Public Token', 'mapbox-for-wp' ),
+			[ $this, 'render_text' ],
+			$this->slug,
+			$this->section,
+			[
+				'label_for' => 'mbwp_public_token',
+				'value'     => $this->options['public_token'],
+				'classes'   => 'regular-text'
+			]
+		);
+
+		register_setting(
+			$this->option_group,
+			'mbwp_public_token',
+			[
+				'sanitize_callback' => 'sanitize_text_field',
+			]
+		);
+
+		/*
+		 * Default style (provided by Mapbox).
+		 */
+		add_settings_field(
+			'mbwp_default_style',
+			esc_html__( 'Default style', 'mapbox-for-wp' ),
+			[ $this, 'render_dropdown' ],
+			$this->slug,
+			$this->section,
+			[
+				'label_for' => 'mbwp_default_style',
+				'value'     => $this->options['default_style'],
+				'styles'    => $this->get_styles(),
+			]
+		);
+
+		register_setting(
+			$this->option_group,
+			'mbwp_default_style',
+			[
+				'sanitize_callback' => 'sanitize_text_field',
+			]
+		);
+	}
+
+	/**
+	 * Helper method to render a text field setting.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args array of extra arguments.
+	 */
+	public function render_text( array $args ) {
+		?>
+		<label for="<?php echo $args['label_for']; ?>">
+			<input class="<?php echo esc_attr( $args['classes'] ); ?>" type="text" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>"/>
+		</label>
+		<?php
+	}
+
+	/**
+	 * Helper method to render a dropdown field setting.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args array of extra arguments.
+	 */
+	public function render_dropdown( array $args ) {
+		?>
+		<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
+			<?php foreach( $args['styles'] as $value => $name ) {
+				printf(
+					'<option value="%s" %s>%s</option>',
+					esc_attr( $value ),
+					selected( $this->options['default_style'], $value, false ),
+					esc_html( $name )
+				);
+			} ?>
+		</select>
+		<?php
+	}
+
+	/**
+	 * Callback to use with the settings section.
+	 *
+	 * @since 1.0.0
+	 */
+	public function settings_callback() {
+		?>
+			<p><?php
+				printf(
+					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
+					sprintf(
+						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
+						esc_url( 'https://docs.mapbox.com/api/maps/styles/' ),
+						esc_html__( 'Mapbox Styles API', 'mapbox-for-wp' )
+					)
+				);
+			?></p>
+		<?php
 	}
 
 	/**
@@ -102,5 +236,19 @@ class Settings {
 	 */
 	public function display_page() {
 		require_once MBWP_PATH . 'includes/admin/partials/settings.php';
+	}
+
+	private function get_styles() {
+		$options = [
+			'streets-v12'           => 'Mapbox Streets',
+			'outdoors-v12'          => 'Mapbox Outdoors',
+			'light-v11'             => 'Mapbox Light',
+			'dark-v11'              => 'Mapbox Dark',
+			'satellite-v9'          => 'Mapbox Satellite',
+			'satellite-streets-v12' => 'Mapbox Satellite Streets',
+			'navigation-day-v1'     => 'Mapbox Navigation Day',
+			'navigation-night-v1'   => 'Mapbox Navigation Night',
+		];
+		return (array) apply_filters( 'mbwp_styles_options', $options );
 	}
 }
