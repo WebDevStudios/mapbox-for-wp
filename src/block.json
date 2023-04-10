@@ -2,14 +2,15 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "webdevstudios/mapbox-for-wp",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"title": "Mapbox For WP",
-	"category": "widgets",
-	"icon": "smiley",
+	"category": "embed",
+	"icon": "location",
 	"description": "Embed Mapbox maps in WordPress.",
 	"supports": {
 		"html": false
 	},
+	"keywords": ["maps", "mapbox"],
 	"textdomain": "mapbox-for-wp",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
