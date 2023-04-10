@@ -4,7 +4,7 @@
  * Description:       Integrate your maps from Mapbox in to WordPress.
  * Requires at least: 6.2
  * Requires PHP:      7.4
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            Pluginize
  * Author URI:        https://pluginize.com
  * License:           GPL-2.0-or-later
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'MBWP_VERSION', '0.1.0' );
+define( 'MBWP_VERSION', '1.0.0' );
 define( 'MBWP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'MBWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'MBWP_PATH', plugin_dir_path( __FILE__ ) );
