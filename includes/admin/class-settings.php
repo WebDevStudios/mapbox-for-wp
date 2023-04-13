@@ -68,7 +68,7 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function do_hooks() {
-		add_action( 'admin_menu', [ $this, 'add_page' ], 11 );
+		add_action( 'admin_menu', [ $this, 'add_page' ] );
 		add_action( 'admin_init', [ $this, 'add_settings' ] );
 	}
 
