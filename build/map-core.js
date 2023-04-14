@@ -53,9 +53,11 @@ __webpack_require__.r(__webpack_exports__);
 const Map = props => {
   const {
     mapboxToken = "",
-    mapboxStyle = ""
+    mapboxStyle = "",
+    mapboxZoom = 0,
+    mapboxPitch = 0,
+    mapboxBearing = 0
   } = props;
-  console.log(mapboxStyle);
   const [map, setMap] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   const mapRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
@@ -65,12 +67,26 @@ const Map = props => {
       container: mapRef.current,
       style: `mapbox://styles/mapbox/${mapboxStyle}`,
       center: [0, 1],
-      zoom: 4
+      zoom: mapboxZoom,
+      pitch: mapboxPitch,
+      bearing: mapboxBearing
     });
     newMap.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().NavigationControl)());
     newMap.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().FullscreenControl)());
     setMap(newMap);
-  }, [map, mapboxToken]);
+  }, [map]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!map) return;
+    map.setZoom(mapboxZoom);
+  }, [mapboxZoom]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!map) return;
+    map.setPitch(mapboxPitch);
+  }, [mapboxPitch]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!map) return;
+    map.setBearing(mapboxBearing);
+  }, [mapboxBearing]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "map-container",
     style: {

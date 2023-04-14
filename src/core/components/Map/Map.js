@@ -6,7 +6,13 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const Map = (props) => {
-	const { mapboxToken = "", mapboxStyle = "" } = props;
+	const {
+		mapboxToken = "",
+		mapboxStyle = "",
+		mapboxZoom = 0,
+		mapboxPitch = 0,
+		mapboxBearing = 0,
+	} = props;
 
 	const [map, setMap] = useState(null);
 	const mapRef = useRef(null);
@@ -20,14 +26,31 @@ const Map = (props) => {
 			container: mapRef.current,
 			style: `mapbox://styles/mapbox/${mapboxStyle}`,
 			center: [0, 1],
-			zoom: 4,
+			zoom: mapboxZoom,
+			pitch: mapboxPitch,
+			bearing: mapboxBearing,
 		});
 
 		newMap.addControl(new mapboxgl.NavigationControl());
 		newMap.addControl(new mapboxgl.FullscreenControl());
 
 		setMap(newMap);
-	}, [map, mapboxToken]);
+	}, [map]);
+
+	useEffect(() => {
+		if (!map) return;
+		map.setZoom(mapboxZoom);
+	}, [mapboxZoom]);
+
+	useEffect(() => {
+		if (!map) return;
+		map.setPitch(mapboxPitch);
+	}, [mapboxPitch]);
+
+	useEffect(() => {
+		if (!map) return;
+		map.setBearing(mapboxBearing);
+	}, [mapboxBearing]);
 
 	return (
 		<div>
