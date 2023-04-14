@@ -12,7 +12,7 @@
 	},
 	"keywords": ["maps", "mapbox"],
 	"textdomain": "mapbox-for-wp",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"editorScript": "file:../../map-block.js",
+	"editorStyle": "file:../../map-block.css",
+	"style": "file:../../syle-map-block.css"
 }

@@ -16,5 +16,8 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.1.0"
+	},
+	"dependencies": {
+		"mapbox-gl": "^2.14.0"
 	}
 }
