@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Map from "@core/components/Map/Map";
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
@@ -8,11 +9,23 @@ import { blockStyle } from "./index";
 const { RawHTML } = wp.element;
 
 export default function edit({ attributes, setAttributes }) {
+	const [coordinates, setCoordinates] = useState({
+		longitude: 0,
+		latitude: 0,
+	});
+
+	useEffect(() => {
+		const { lng, lat } = coordinates;
+
+		setAttributes({
+			longitude: lng,
+			latitude: lat,
+		});
+	}, [coordinates]);
+
 	const blockProps = useBlockProps({ style: blockStyle });
-	const shortcode = "[mapbox_wp]";
 
 	const { mapboxToken = "", mapboxStyle = "" } = mbwp_data || {};
-
 	const { zoom = 0, pitch = 0, bearing = 0 } = attributes || {};
 
 	return (
@@ -42,13 +55,16 @@ export default function edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div {...useBlockProps()}>
+			<div {...blockProps}>
 				<Map
 					mapboxToken={mapboxToken}
 					mapboxStyle={mapboxStyle}
+					mapboxLongitude={coordinates.longitude}
+					mapboxLatitude={coordinates.latitude}
 					mapboxZoom={zoom}
 					mapboxPitch={pitch}
 					mapboxBearing={bearing}
+					updateCallback={setCoordinates}
 				/>
 			</div>
 		</>

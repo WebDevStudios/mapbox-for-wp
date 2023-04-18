@@ -9,9 +9,12 @@ const Map = (props) => {
 	const {
 		mapboxToken = "",
 		mapboxStyle = "",
+		mapboxLongitude = 0,
+		mapboxLatitude = 0,
 		mapboxZoom = 0,
 		mapboxPitch = 0,
 		mapboxBearing = 0,
+		updateCallback = () => {},
 	} = props;
 
 	const [map, setMap] = useState(null);
@@ -25,7 +28,7 @@ const Map = (props) => {
 		const newMap = new mapboxgl.Map({
 			container: mapRef.current,
 			style: `mapbox://styles/mapbox/${mapboxStyle}`,
-			center: [0, 1],
+			center: [mapboxLongitude, mapboxLatitude],
 			zoom: mapboxZoom,
 			pitch: mapboxPitch,
 			bearing: mapboxBearing,
@@ -34,8 +37,19 @@ const Map = (props) => {
 		newMap.addControl(new mapboxgl.NavigationControl());
 		newMap.addControl(new mapboxgl.FullscreenControl());
 
+		newMap.on("moveend", () => {
+			const { lng, lat } = newMap.getCenter();
+
+			updateCallback({ lng, lat });
+		});
+
 		setMap(newMap);
 	}, [map]);
+
+	useEffect(() => {
+		if (!map) return;
+		map.setCenter([mapboxLongitude, mapboxLatitude]);
+	}, [mapboxLongitude, mapboxLatitude]);
 
 	useEffect(() => {
 		if (!map) return;

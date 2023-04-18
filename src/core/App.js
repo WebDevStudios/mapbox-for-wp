@@ -5,7 +5,8 @@ import Map from "./components/Map/Map";
 const App = () => {
 	const { mapboxToken = "", mapboxStyle = "" } = mbwp_data || {};
 
-	const [mapboxCoords, setMapboxCoords] = useState([0, 0]);
+	const [mapboxLongitude, setMapboxLongitude] = useState(0);
+	const [mapboxLatitude, setMapboxLatitude] = useState(0);
 	const [mapboxZoom, setMapboxZoom] = useState(0);
 	const [mapboxPitch, setMapboxPitch] = useState(0);
 	const [mapboxBearing, setMapboxBearing] = useState(0);
@@ -20,18 +21,20 @@ const App = () => {
 		const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
 		const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
 
-		setMapboxCoords([longitude, latitude]);
+		setMapboxLongitude(longitude);
+		setMapboxLatitude(latitude);
 		setMapboxZoom(zoom);
 		setMapboxPitch(pitch);
 		setMapboxBearing(bearing);
-	}, []);
+	}, [mapboxLongitude, mapboxLatitude, mapboxZoom, mapboxPitch, mapboxBearing]);
 
 	return (
 		<div>
 			<Map
 				mapboxToken={mapboxToken}
 				mapboxStyle={mapboxStyle}
-				mapboxCoords={mapboxCoords}
+				mapboxLongitude={mapboxLongitude}
+				mapboxLatitude={mapboxLatitude}
 				mapboxZoom={mapboxZoom}
 				mapboxPitch={mapboxPitch}
 				mapboxBearing={mapboxBearing}

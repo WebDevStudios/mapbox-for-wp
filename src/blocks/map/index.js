@@ -10,8 +10,6 @@ export const blockStyle = {};
 
 const { name, title } = json;
 
-console.log(name);
-
 registerBlockType(name, {
 	title,
 	edit,

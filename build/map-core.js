@@ -22,7 +22,8 @@ const App = () => {
     mapboxToken = "",
     mapboxStyle = ""
   } = mbwp_data || {};
-  const [mapboxCoords, setMapboxCoords] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 0]);
+  const [mapboxLongitude, setMapboxLongitude] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [mapboxLatitude, setMapboxLatitude] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxZoom, setMapboxZoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxPitch, setMapboxPitch] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxBearing, setMapboxBearing] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -33,15 +34,19 @@ const App = () => {
     const zoom = mapboxForWP.getAttribute("data-zoom") || 0;
     const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
     const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
-    setMapboxCoords([longitude, latitude]);
+    console.log(longitude);
+    console.log(latitude);
+    setMapboxLongitude(longitude);
+    setMapboxLatitude(latitude);
     setMapboxZoom(zoom);
     setMapboxPitch(pitch);
     setMapboxBearing(bearing);
-  }, []);
+  }, [mapboxLongitude, mapboxLatitude, mapboxZoom, mapboxPitch, mapboxBearing]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapboxToken: mapboxToken,
     mapboxStyle: mapboxStyle,
-    mapboxCoords: mapboxCoords,
+    mapboxLongitude: mapboxLongitude,
+    mapboxLatitude: mapboxLatitude,
     mapboxZoom: mapboxZoom,
     mapboxPitch: mapboxPitch,
     mapboxBearing: mapboxBearing
@@ -77,9 +82,12 @@ const Map = props => {
   const {
     mapboxToken = "",
     mapboxStyle = "",
+    mapboxLongitude = 0,
+    mapboxLatitude = 0,
     mapboxZoom = 0,
     mapboxPitch = 0,
-    mapboxBearing = 0
+    mapboxBearing = 0,
+    updateCallback = () => {}
   } = props;
   const [map, setMap] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
   const mapRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
@@ -89,15 +97,29 @@ const Map = props => {
     const newMap = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().Map)({
       container: mapRef.current,
       style: `mapbox://styles/mapbox/${mapboxStyle}`,
-      center: [0, 1],
+      center: [mapboxLongitude, mapboxLatitude],
       zoom: mapboxZoom,
       pitch: mapboxPitch,
       bearing: mapboxBearing
     });
     newMap.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().NavigationControl)());
     newMap.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().FullscreenControl)());
+    newMap.on("moveend", () => {
+      const {
+        lng,
+        lat
+      } = newMap.getCenter();
+      updateCallback({
+        lng,
+        lat
+      });
+    });
     setMap(newMap);
   }, [map]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!map) return;
+    map.setCenter([mapboxLongitude, mapboxLatitude]);
+  }, [mapboxLongitude, mapboxLatitude]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!map) return;
     map.setZoom(mapboxZoom);
