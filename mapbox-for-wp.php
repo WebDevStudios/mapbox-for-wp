@@ -33,13 +33,24 @@ $mbwp->do_hooks();
 function create_block_mapbox_for_wp_block_init() {
 	register_block_type( __DIR__ . '/build/blocks/map' );
 }
-add_action( 'init', __NAMESPACE__ . '\create_block_mapbox_for_wp_block_init' );
+// add_action( 'init', __NAMESPACE__ . '\create_block_mapbox_for_wp_block_init' );
 
-function render_mapbox() {
-	ob_start();
-	?>
-    <div id="mapbox-for-wp"></div>
-	<?php return ob_get_clean();
+function render_mapbox($atts) {
+    $atts = shortcode_atts(array(
+        'zoom' => '0',
+        'pitch' => '0',
+        'bearing' => '0'
+    ), $atts);
+
+    $zoom = intval($atts['zoom']);
+    $pitch = intval($atts['pitch']);
+    $bearing = intval($atts['bearing']);
+
+    ob_start();
+    ?>
+    <div id="mapbox-for-wp" data-zoom="<?php echo $zoom; ?>" data-pitch="<?php echo $pitch; ?>" data-bearing="<?php echo $bearing; ?>"></div>
+    <?php
+    return ob_get_clean();
 }
 add_shortcode('mapbox_wp', __NAMESPACE__ . '\render_mapbox');
 

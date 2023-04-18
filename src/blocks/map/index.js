@@ -10,7 +10,24 @@ export const blockStyle = {};
 
 const { name } = json;
 
+console.log(name);
+
 registerBlockType(name, {
+	title: "Mapbox",
 	edit,
 	save,
+	attributes: {
+		zoom: {
+			type: "number",
+			default: 0,
+		},
+		pitch: {
+			type: "number",
+			default: 0,
+		},
+		bearing: {
+			type: "number",
+			default: 0,
+		},
+	},
 });

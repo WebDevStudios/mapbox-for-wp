@@ -112,9 +112,25 @@ const blockStyle = {};
 const {
   name
 } = _block_json__WEBPACK_IMPORTED_MODULE_3__;
+console.log(name);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
+  title: "Mapbox",
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"]
+  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
+  attributes: {
+    zoom: {
+      type: "number",
+      default: 0
+    },
+    pitch: {
+      type: "number",
+      default: 0
+    },
+    bearing: {
+      type: "number",
+      default: 0
+    }
+  }
 });
 
 /***/ }),
@@ -153,7 +169,7 @@ function save(_ref) {
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
     style: _index__WEBPACK_IMPORTED_MODULE_2__.blockStyle
   });
-  const shortcode = `[mapbox_wp zoom="${zoom}" pitch="${pitch}" bearing="${bearing}"]`;
+  const shortcode = `[mapbox_wp zoom="${encodeURIComponent(zoom)}" pitch="${encodeURIComponent(pitch)}" bearing="${encodeURIComponent(bearing)}"]`;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, shortcode));
 }
 
