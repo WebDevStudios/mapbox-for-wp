@@ -8,10 +8,10 @@ import "./style.scss";
 
 export const blockStyle = {};
 
-const { name, title } = json;
+const { name } = json;
 
 registerBlockType(name, {
-	title,
+	...json,
 	edit,
 	save,
 	attributes: {

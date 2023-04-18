@@ -39,20 +39,6 @@ function edit(_ref) {
     attributes,
     setAttributes
   } = _ref;
-  const [coordinates, setCoordinates] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    longitude: 0,
-    latitude: 0
-  });
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const {
-      lng,
-      lat
-    } = coordinates;
-    setAttributes({
-      longitude: lng,
-      latitude: lat
-    });
-  }, [coordinates]);
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
     style: _index__WEBPACK_IMPORTED_MODULE_6__.blockStyle
   });
@@ -65,6 +51,18 @@ function edit(_ref) {
     pitch = 0,
     bearing = 0
   } = attributes || {};
+  const [mapAttributes, setMapAttributes] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    longitude: 0,
+    latitude: 0,
+    zoom,
+    pitch,
+    bearing
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    setAttributes({
+      ...mapAttributes
+    });
+  }, [mapAttributes]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Map Options")
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.RangeControl, {
@@ -94,12 +92,12 @@ function edit(_ref) {
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_core_components_Map_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapboxToken: mapboxToken,
     mapboxStyle: mapboxStyle,
-    mapboxLongitude: coordinates.longitude,
-    mapboxLatitude: coordinates.latitude,
-    mapboxZoom: zoom,
-    mapboxPitch: pitch,
-    mapboxBearing: bearing,
-    updateCallback: setCoordinates
+    mapboxLongitude: mapAttributes.longitude,
+    mapboxLatitude: mapAttributes.latitude,
+    mapboxZoom: mapAttributes.zoom,
+    mapboxPitch: mapAttributes.pitch,
+    mapboxBearing: mapAttributes.bearing,
+    updateCallback: setMapAttributes
   })));
 }
 
@@ -129,11 +127,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const blockStyle = {};
 const {
-  name,
-  title
+  name
 } = _block_json__WEBPACK_IMPORTED_MODULE_3__;
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
-  title,
+  ..._block_json__WEBPACK_IMPORTED_MODULE_3__,
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
   attributes: {
@@ -247,11 +244,12 @@ const Map = props => {
   const mapRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (map) return;
+    console.log(mapboxLongitude, mapboxLatitude);
     (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().accessToken) = mapboxToken;
     const newMap = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().Map)({
       container: mapRef.current,
       style: `mapbox://styles/mapbox/${mapboxStyle}`,
-      center: [mapboxLongitude, mapboxLatitude],
+      center: [0, 0],
       zoom: mapboxZoom,
       pitch: mapboxPitch,
       bearing: mapboxBearing
@@ -260,12 +258,18 @@ const Map = props => {
     newMap.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().FullscreenControl)());
     newMap.on("moveend", () => {
       const {
-        lng,
-        lat
+        lng: longitude,
+        lat: latitude
       } = newMap.getCenter();
+      const zoom = newMap.getZoom();
+      const pitch = newMap.getPitch();
+      const bearing = newMap.getBearing();
       updateCallback({
-        lng,
-        lat
+        longitude,
+        latitude,
+        zoom,
+        pitch,
+        bearing
       });
     });
     setMap(newMap);

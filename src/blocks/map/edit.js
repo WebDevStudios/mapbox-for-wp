@@ -9,24 +9,22 @@ import { blockStyle } from "./index";
 const { RawHTML } = wp.element;
 
 export default function edit({ attributes, setAttributes }) {
-	const [coordinates, setCoordinates] = useState({
-		longitude: 0,
-		latitude: 0,
-	});
-
-	useEffect(() => {
-		const { lng, lat } = coordinates;
-
-		setAttributes({
-			longitude: lng,
-			latitude: lat,
-		});
-	}, [coordinates]);
-
 	const blockProps = useBlockProps({ style: blockStyle });
 
 	const { mapboxToken = "", mapboxStyle = "" } = mbwp_data || {};
 	const { zoom = 0, pitch = 0, bearing = 0 } = attributes || {};
+
+	const [mapAttributes, setMapAttributes] = useState({
+		longitude: 0,
+		latitude: 0,
+		zoom,
+		pitch,
+		bearing,
+	});
+
+	useEffect(() => {
+		setAttributes({ ...mapAttributes });
+	}, [mapAttributes]);
 
 	return (
 		<>
@@ -59,12 +57,12 @@ export default function edit({ attributes, setAttributes }) {
 				<Map
 					mapboxToken={mapboxToken}
 					mapboxStyle={mapboxStyle}
-					mapboxLongitude={coordinates.longitude}
-					mapboxLatitude={coordinates.latitude}
-					mapboxZoom={zoom}
-					mapboxPitch={pitch}
-					mapboxBearing={bearing}
-					updateCallback={setCoordinates}
+					mapboxLongitude={mapAttributes.longitude}
+					mapboxLatitude={mapAttributes.latitude}
+					mapboxZoom={mapAttributes.zoom}
+					mapboxPitch={mapAttributes.pitch}
+					mapboxBearing={mapAttributes.bearing}
+					updateCallback={setMapAttributes}
 				/>
 			</div>
 		</>

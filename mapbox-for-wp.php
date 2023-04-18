@@ -39,11 +39,11 @@ function render_mapbox($atts) {
  		'bearing' => '0'
     ), $atts);
 
-	$longitude =intval($atts['longitude']);
-	$latitude = intval($atts['latitude']);
-	$zoom = intval($atts['zoom']);
-	$pitch = intval($atts['pitch']);
-	$bearing = intval($atts['bearing']);
+	$longitude =floatval($atts['longitude']);
+	$latitude = floatval($atts['latitude']);
+	$zoom = floatval($atts['zoom']);
+	$pitch = floatval($atts['pitch']);
+	$bearing = floatval($atts['bearing']);
 
     ob_start();
     ?>

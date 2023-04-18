@@ -16,7 +16,6 @@ const App = () => {
 
 		const longitude = mapboxForWP.getAttribute("data-longitude") || 0;
 		const latitude = mapboxForWP.getAttribute("data-latitude") || 0;
-
 		const zoom = mapboxForWP.getAttribute("data-zoom") || 0;
 		const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
 		const bearing = mapboxForWP.getAttribute("data-bearing") || 0;

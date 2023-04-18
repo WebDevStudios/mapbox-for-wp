@@ -28,7 +28,7 @@ const Map = (props) => {
 		const newMap = new mapboxgl.Map({
 			container: mapRef.current,
 			style: `mapbox://styles/mapbox/${mapboxStyle}`,
-			center: [mapboxLongitude, mapboxLatitude],
+			center: [0, 0],
 			zoom: mapboxZoom,
 			pitch: mapboxPitch,
 			bearing: mapboxBearing,
@@ -38,9 +38,12 @@ const Map = (props) => {
 		newMap.addControl(new mapboxgl.FullscreenControl());
 
 		newMap.on("moveend", () => {
-			const { lng, lat } = newMap.getCenter();
+			const { lng: longitude, lat: latitude } = newMap.getCenter();
+			const zoom = newMap.getZoom();
+			const pitch = newMap.getPitch();
+			const bearing = newMap.getBearing();
 
-			updateCallback({ lng, lat });
+			updateCallback({ longitude, latitude, zoom, pitch, bearing });
 		});
 
 		setMap(newMap);
