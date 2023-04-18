@@ -8,15 +8,23 @@ import "./style.scss";
 
 export const blockStyle = {};
 
-const { name } = json;
+const { name, title } = json;
 
 console.log(name);
 
 registerBlockType(name, {
-	title: "Mapbox",
+	title,
 	edit,
 	save,
 	attributes: {
+		longitude: {
+			type: "number",
+			default: 0,
+		},
+		latitude: {
+			type: "number",
+			default: 0,
+		},
 		zoom: {
 			type: "number",
 			default: 0,

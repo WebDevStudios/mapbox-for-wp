@@ -110,14 +110,23 @@ __webpack_require__.r(__webpack_exports__);
 
 const blockStyle = {};
 const {
-  name
+  name,
+  title
 } = _block_json__WEBPACK_IMPORTED_MODULE_3__;
 console.log(name);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
-  title: "Mapbox",
+  title,
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
   attributes: {
+    longitude: {
+      type: "number",
+      default: 0
+    },
+    latitude: {
+      type: "number",
+      default: 0
+    },
     zoom: {
       type: "number",
       default: 0

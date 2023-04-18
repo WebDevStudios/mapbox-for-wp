@@ -22,14 +22,18 @@ const App = () => {
     mapboxToken = "",
     mapboxStyle = ""
   } = mbwp_data || {};
+  const [mapboxCoords, setMapboxCoords] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 0]);
   const [mapboxZoom, setMapboxZoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxPitch, setMapboxPitch] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxBearing, setMapboxBearing] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     const mapboxForWP = document.getElementById("mapbox-for-wp");
+    const longitude = mapboxForWP.getAttribute("data-longitude") || 0;
+    const latitude = mapboxForWP.getAttribute("data-latitude") || 0;
     const zoom = mapboxForWP.getAttribute("data-zoom") || 0;
     const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
     const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
+    setMapboxCoords([longitude, latitude]);
     setMapboxZoom(zoom);
     setMapboxPitch(pitch);
     setMapboxBearing(bearing);
@@ -37,6 +41,7 @@ const App = () => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapboxToken: mapboxToken,
     mapboxStyle: mapboxStyle,
+    mapboxCoords: mapboxCoords,
     mapboxZoom: mapboxZoom,
     mapboxPitch: mapboxPitch,
     mapboxBearing: mapboxBearing
