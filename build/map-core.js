@@ -11,7 +11,10 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_Map_Map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Map/Map */ "./src/core/components/Map/Map.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Map_Map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Map/Map */ "./src/core/components/Map/Map.js");
+
 
 
 const App = () => {
@@ -19,9 +22,24 @@ const App = () => {
     mapboxToken = "",
     mapboxStyle = ""
   } = mbwp_data || {};
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_Map__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  const [mapboxZoom, setMapboxZoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [mapboxPitch, setMapboxPitch] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [mapboxBearing, setMapboxBearing] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const mapboxForWP = document.getElementById("mapbox-for-wp");
+    const zoom = mapboxForWP.getAttribute("data-zoom") || 0;
+    const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
+    const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
+    setMapboxZoom(zoom);
+    setMapboxPitch(pitch);
+    setMapboxBearing(bearing);
+  }, []);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapboxToken: mapboxToken,
-    mapboxStyle: mapboxStyle
+    mapboxStyle: mapboxStyle,
+    mapboxZoom: mapboxZoom,
+    mapboxPitch: mapboxPitch,
+    mapboxBearing: mapboxBearing
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (App);
