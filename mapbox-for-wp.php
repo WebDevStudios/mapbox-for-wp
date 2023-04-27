@@ -15,7 +15,7 @@
 namespace WebDevStudios\MBWP;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
 define( 'MBWP_VERSION', '1.0.0' );
@@ -39,7 +39,7 @@ function render_mapbox($atts) {
  		'bearing' => '0'
     ), $atts);
 
-	$longitude =floatval($atts['longitude']);
+	$longitude = floatval($atts['longitude']);
 	$latitude = floatval($atts['latitude']);
 	$zoom = floatval($atts['zoom']);
 	$pitch = floatval($atts['pitch']);

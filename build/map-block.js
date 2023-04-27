@@ -244,7 +244,6 @@ const Map = props => {
   const mapRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (map) return;
-    console.log(mapboxLongitude, mapboxLatitude);
     (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().accessToken) = mapboxToken;
     const newMap = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().Map)({
       container: mapRef.current,

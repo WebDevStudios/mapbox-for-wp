@@ -1,7 +1,7 @@
 {
 	"name": "mapbox-for-wp",
 	"version": "0.1.0",
-	"description": "Integrate your maps from Mapbox in to WordPress.",
+	"description": "Integrate your maps from Mapbox into WordPress.",
 	"author": "Pluginize",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
