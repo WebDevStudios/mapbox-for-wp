@@ -56,8 +56,8 @@ class Settings {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_option( 'mbwp_public_token', '' );
-		add_option( 'mbwp_default_style', '' );
+		add_option( 'mbwp_public_token' );
+		add_option( 'mbwp_default_style' );
 
 		$this->options = $this->set_options();
 	}
@@ -79,7 +79,7 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	private function set_options() {
+	private function set_options(): array {
 		return [
 			'public_token'  => get_option( 'mbwp_public_token' ),
 			'default_style' => get_option( 'mbwp_default_style' ),
@@ -196,16 +196,18 @@ class Settings {
 	 */
 	public function render_dropdown( array $args ) {
 		?>
-		<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
-			<?php foreach( $args['styles'] as $value => $name ) {
-				printf(
-					'<option value="%s" %s>%s</option>',
-					esc_attr( $value ),
-					selected( $this->options['default_style'], $value, false ),
-					esc_html( $name )
-				);
-			} ?>
-		</select>
+		<label for="<?php echo $args['label_for']; ?>">
+			<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
+				<?php foreach( $args['styles'] as $value => $name ) {
+					printf(
+						'<option value="%s" %s>%s</option>',
+						esc_attr( $value ),
+						selected( $this->options['default_style'], $value, false ),
+						esc_html( $name )
+					);
+				} ?>
+			</select>
+		</label>
 		<?php
 	}
 
@@ -238,7 +240,14 @@ class Settings {
 		require_once MBWP_PATH . 'includes/admin/partials/settings.php';
 	}
 
-	private function get_styles() {
+	/**
+	 * Return an array of styles for our default style dropdown option.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	private function get_styles(): array {
 		$options = [
 			'streets-v12'           => 'Mapbox Streets',
 			'outdoors-v12'          => 'Mapbox Outdoors',
