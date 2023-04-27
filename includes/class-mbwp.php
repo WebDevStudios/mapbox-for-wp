@@ -16,7 +16,7 @@ final class MBWP {
 	 *
 	 * @var Settings
 	 */
-	private $settings;
+	private Settings $settings;
 
 	/**
 	 * Executes our hooks to wire everything up.
