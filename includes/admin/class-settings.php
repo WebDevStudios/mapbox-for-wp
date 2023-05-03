@@ -249,14 +249,14 @@ class Settings {
 	 */
 	private function get_styles(): array {
 		$options = [
-			'streets-v12'           => 'Mapbox Streets',
-			'outdoors-v12'          => 'Mapbox Outdoors',
-			'light-v11'             => 'Mapbox Light',
-			'dark-v11'              => 'Mapbox Dark',
-			'satellite-v9'          => 'Mapbox Satellite',
-			'satellite-streets-v12' => 'Mapbox Satellite Streets',
-			'navigation-day-v1'     => 'Mapbox Navigation Day',
-			'navigation-night-v1'   => 'Mapbox Navigation Night',
+			'mapbox://styles/mapbox/streets-v12'           => 'Mapbox Streets',
+			'mapbox://styles/mapbox/outdoors-v12'          => 'Mapbox Outdoors',
+			'mapbox://styles/mapbox/light-v11'             => 'Mapbox Light',
+			'mapbox://styles/mapbox/dark-v11'              => 'Mapbox Dark',
+			'mapbox://styles/mapbox/satellite-v9'          => 'Mapbox Satellite',
+			'mapbox://styles/mapbox/satellite-streets-v12' => 'Mapbox Satellite Streets',
+			'mapbox://styles/mapbox/navigation-day-v1'     => 'Mapbox Navigation Day',
+			'mapbox://styles/mapbox/navigation-night-v1'   => 'Mapbox Navigation Night',
 		];
 		return (array) apply_filters( 'mbwp_styles_options', $options );
 	}
