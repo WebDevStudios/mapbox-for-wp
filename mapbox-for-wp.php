@@ -30,7 +30,7 @@ require_once 'vendor/autoload.php';
 $mbwp = MBWP_Factory::create();
 $mbwp->do_hooks();
 
-function render_mapbox($atts) {
+function render_callback($atts) {
 	$longitude = floatval( $atts['longitude'] );
 	$latitude  = floatval( $atts['latitude'] );
 	$zoom      = floatval( $atts['zoom'] );
