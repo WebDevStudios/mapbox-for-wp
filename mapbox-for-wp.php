@@ -31,19 +31,12 @@ $mbwp = MBWP_Factory::create();
 $mbwp->do_hooks();
 
 function render_mapbox($atts) {
-	$atts = shortcode_atts( [
-		'longitude' => '0',
-		'latitude'  => '0',
-		'zoom'      => '0',
-		'pitch'     => '0',
-		'bearing'   => '0'
-	], $atts );
-
 	$longitude = floatval( $atts['longitude'] );
 	$latitude  = floatval( $atts['latitude'] );
 	$zoom      = floatval( $atts['zoom'] );
 	$pitch     = floatval( $atts['pitch'] );
 	$bearing   = floatval( $atts['bearing'] );
+	$style     = $atts['style'];
 
     ob_start();
     ?>
@@ -53,20 +46,20 @@ function render_mapbox($atts) {
 		data-zoom="<?php echo esc_attr( $zoom ); ?>"
 		data-pitch="<?php echo esc_attr( $pitch ); ?>"
 		data-bearing="<?php echo esc_attr( $bearing ); ?>">
+		data-style="<?php echo esc_attr( $style ); ?>">
 	</div>
     <?php
     return ob_get_clean();
 }
-add_shortcode('mapbox_wp', __NAMESPACE__ . '\render_mapbox');
 
 function enqueue_scripts(){
 	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
-	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . '/build/map-core.css', [], $version );
-	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . '/build/map-core.js', [ 'wp-element' ], $version, true );
+	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.css', [], $version );
+	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.js', [ 'wp-element' ], $version, true );
 
 	wp_localize_script( 'mapbox_wp', 'mbwp_data', [
-		'mapboxToken' => get_option( 'mbwp_public_token' ),
-		'mapboxStyle' => get_option( 'mbwp_default_style' ),
+		'mapboxToken'        => get_option( 'mbwp_public_token' ),
+		'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
 	] );
 
 	wp_enqueue_script( 'mapbox_wp' );
@@ -75,14 +68,50 @@ add_action('wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts');
 
 function mbwp_enqueue_editor_assets() {
 	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
-	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . '/build/map-core.css', [], $version );
-    wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . '/build/map-block.js', [ 'wp-blocks', 'wp-i18n', 'wp-element' ], $version, true );
+	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.css', [], $version );
+    wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.js', [ 'wp-blocks', 'wp-i18n', 'wp-element' ], $version, true );
 
 	wp_localize_script( 'mapbox_wp', 'mbwp_data', [
-        'mapboxToken' => get_option('mbwp_public_token'),
-		'mapboxStyle' => get_option('mbwp_default_style'),
+		'mapboxToken'        => get_option( 'mbwp_public_token' ),
+		'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
     ] );
 
 	wp_enqueue_script( 'mapbox_wp' );
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\mbwp_enqueue_editor_assets' );
+
+function register_block() {
+	register_block_type( 'webdevstudios/mapbox-for-wp', [
+		'editor_script'   => 'mapbox_wp',
+		'editor_style'    => 'mapbox_wp',
+		'style'           => 'mapbox_wp',
+		'render_callback' => __NAMESPACE__ . '\render_callback',
+		'attributes'      => [
+			'longitude' => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'latitude'  => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'zoom'      => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'pitch'     => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'bearing'   => [
+				'type'    => 'number',
+				'default' => 0,
+			],
+			'style'     => [
+				'type'    => 'string',
+				'default' => '',
+			],
+		],
+	] );
+}
+add_action( 'init', __NAMESPACE__ . '\register_block' );
