@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Map from "@core/components/Map/Map";
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
-import { PanelBody, RangeControl } from "@wordpress/components";
+import { PanelBody, TextControl, RangeControl } from "@wordpress/components";
 
 import { blockStyle } from "./index";
 
@@ -10,9 +10,16 @@ const { RawHTML } = wp.element;
 
 export default function edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps({ style: blockStyle });
+	const { mapboxToken = "", mapboxDefaultStyle = "" } = mbwp_data || {};
 
-	const { mapboxToken = "", mapboxStyle = "" } = mbwp_data || {};
-	const { zoom = 0, pitch = 0, bearing = 0 } = attributes || {};
+	const {
+		longitude = 0,
+		latitude = 0,
+		zoom = 0,
+		pitch = 0,
+		bearing = 0,
+		style = mapboxDefaultStyle,
+	} = attributes || {};
 
 	const [mapAttributes, setMapAttributes] = useState({
 		longitude: 0,
@@ -20,6 +27,7 @@ export default function edit({ attributes, setAttributes }) {
 		zoom,
 		pitch,
 		bearing,
+		style,
 	});
 
 	useEffect(() => {
@@ -51,17 +59,34 @@ export default function edit({ attributes, setAttributes }) {
 						min={0}
 						max={360}
 					/>
+					<TextControl
+						label={__("Longitude")}
+						value={longitude}
+						onChange={(newLongitude) =>
+							setAttributes({ longitude: newLongitude })
+						}
+					/>
+					<TextControl
+						label={__("Latitude")}
+						value={latitude}
+						onChange={(newLatitude) => setAttributes({ latitude: newLatitude })}
+					/>
+					<TextControl
+						label={__("Style")}
+						value={style}
+						onChange={(newStyle) => setAttributes({ style: newStyle })}
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>
 				<Map
 					mapboxToken={mapboxToken}
-					mapboxStyle={mapboxStyle}
-					mapboxLongitude={mapAttributes.longitude}
-					mapboxLatitude={mapAttributes.latitude}
-					mapboxZoom={mapAttributes.zoom}
-					mapboxPitch={mapAttributes.pitch}
-					mapboxBearing={mapAttributes.bearing}
+					mapboxStyle={style || mapboxDefaultStyle}
+					mapboxLongitude={longitude}
+					mapboxLatitude={latitude}
+					mapboxZoom={zoom}
+					mapboxPitch={pitch}
+					mapboxBearing={bearing}
 					updateCallback={setMapAttributes}
 				/>
 			</div>

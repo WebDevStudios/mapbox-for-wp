@@ -1,7 +1,6 @@
 import { registerBlockType } from "@wordpress/blocks";
 
 import edit from "./edit";
-import save from "./save";
 import json from "./block.json";
 
 import "./style.scss";
@@ -13,7 +12,7 @@ const { name } = json;
 registerBlockType(name, {
 	...json,
 	edit,
-	save,
+	save: () => null,
 	attributes: {
 		longitude: {
 			type: "number",
@@ -34,6 +33,10 @@ registerBlockType(name, {
 		bearing: {
 			type: "number",
 			default: 0,
+		},
+		style: {
+			type: "string",
+			default: "",
 		},
 	},
 });

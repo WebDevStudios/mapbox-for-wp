@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import Map from "./components/Map/Map";
 
 const App = () => {
-	const { mapboxToken = "", mapboxStyle = "" } = mbwp_data || {};
+	const { mapboxToken = "", mapboxDefaultStyle = "" } = mbwp_data || {};
 
 	const [mapboxLongitude, setMapboxLongitude] = useState(0);
 	const [mapboxLatitude, setMapboxLatitude] = useState(0);
 	const [mapboxZoom, setMapboxZoom] = useState(0);
 	const [mapboxPitch, setMapboxPitch] = useState(0);
 	const [mapboxBearing, setMapboxBearing] = useState(0);
+	const [mapboxStyle, setMapboxStyle] = useState(mapboxDefaultStyle);
 
 	useEffect(() => {
 		const mapboxForWP = document.getElementById("mapbox-for-wp");
@@ -20,12 +21,25 @@ const App = () => {
 		const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
 		const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
 
+		const style =
+			decodeURIComponent(mapboxForWP.getAttribute("data-style")) ||
+			mapboxDefaultStyle;
+
 		setMapboxLongitude(longitude);
 		setMapboxLatitude(latitude);
 		setMapboxZoom(zoom);
 		setMapboxPitch(pitch);
 		setMapboxBearing(bearing);
-	}, [mapboxLongitude, mapboxLatitude, mapboxZoom, mapboxPitch, mapboxBearing]);
+
+		setMapboxStyle(style);
+	}, [
+		mapboxLongitude,
+		mapboxLatitude,
+		mapboxZoom,
+		mapboxPitch,
+		mapboxBearing,
+		mapboxStyle,
+	]);
 
 	return (
 		<div>
