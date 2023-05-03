@@ -45,7 +45,7 @@ function render_callback($atts) {
 		data-latitude="<?php echo esc_attr( $latitude ); ?>"
 		data-zoom="<?php echo esc_attr( $zoom ); ?>"
 		data-pitch="<?php echo esc_attr( $pitch ); ?>"
-		data-bearing="<?php echo esc_attr( $bearing ); ?>">
+		data-bearing="<?php echo esc_attr( $bearing ); ?>"
 		data-style="<?php echo esc_attr( $style ); ?>">
 	</div>
     <?php
