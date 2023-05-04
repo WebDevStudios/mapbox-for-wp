@@ -10,8 +10,8 @@ namespace WebDevStudios\MBWP;
 class MBWP_Factory {
 
 	/**
-	 * Create and return a shared instance of the MBWP
-	 * .
+	 * Create and return a shared instance of the MBWP.
+	 *
 	 *
 	 * @return MBWP The shared plugin instance.
 	 * @since  1.0.0
