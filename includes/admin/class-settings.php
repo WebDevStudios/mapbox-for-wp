@@ -213,7 +213,7 @@ class Settings {
 				?>
 			</select>
 		</label>
-		<p><?php echo esc_html( $extra_label ); ?></p>
+		<p class="description"><?php echo esc_html( $extra_label ); ?></p>
 		<?php
 	}
 
