@@ -63,8 +63,8 @@ class Settings {
 	}
 
 	/**
-	 * Execute our hooks
-	 * .
+	 * Execute our hooks.
+	 *
 	 *
 	 * @since 1.0.0
 	 */
