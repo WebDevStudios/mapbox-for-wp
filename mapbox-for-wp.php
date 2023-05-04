@@ -30,7 +30,7 @@ require_once 'vendor/autoload.php';
 $mbwp = MBWP_Factory::create();
 $mbwp->do_hooks();
 
-function render_callback($atts) {
+function render_callback( $atts ) {
 	$longitude = floatval( $atts['longitude'] );
 	$latitude  = floatval( $atts['latitude'] );
 	$zoom      = floatval( $atts['zoom'] );
@@ -38,8 +38,8 @@ function render_callback($atts) {
 	$bearing   = floatval( $atts['bearing'] );
 	$style     = $atts['style'];
 
-    ob_start();
-    ?>
+	ob_start();
+	?>
 	<div id="mapbox-for-wp"
 		data-longitude="<?php echo esc_attr( $longitude ); ?>"
 		data-latitude="<?php echo esc_attr( $latitude ); ?>"
@@ -48,70 +48,81 @@ function render_callback($atts) {
 		data-bearing="<?php echo esc_attr( $bearing ); ?>"
 		data-style="<?php echo esc_attr( $style ); ?>">
 	</div>
-    <?php
-    return ob_get_clean();
+	<?php
+	return ob_get_clean();
 }
 
-function enqueue_scripts(){
+function enqueue_scripts() {
 	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
 	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.css', [], $version );
 	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.js', [ 'wp-element' ], $version, true );
 
-	wp_localize_script( 'mapbox_wp', 'mbwp_data', [
-		'mapboxToken'        => get_option( 'mbwp_public_token' ),
-		'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
-	] );
+	wp_localize_script(
+		'mapbox_wp',
+		'mbwpData',
+		[
+			'mapboxToken'        => get_option( 'mbwp_public_token' ),
+			'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
+		]
+	);
 
 	wp_enqueue_script( 'mapbox_wp' );
 }
-add_action('wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts');
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts' );
 
 function mbwp_enqueue_editor_assets() {
 	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
 	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.css', [], $version );
-    wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.js', [ 'wp-blocks', 'wp-i18n', 'wp-element' ], $version, true );
+	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.js', [ 'wp-blocks', 'wp-i18n', 'wp-element' ], $version, true );
 
-	wp_localize_script( 'mapbox_wp', 'mbwp_data', [
-		'mapboxToken'        => get_option( 'mbwp_public_token' ),
-		'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
-    ] );
+	wp_localize_script(
+		'mapbox_wp',
+		'mbwpData',
+		[
+			'mapboxToken'        => get_option( 'mbwp_public_token' ),
+			'mapboxDefaultStyle' => get_option( 'mbwp_default_style' ),
+		]
+	);
 
 	wp_enqueue_script( 'mapbox_wp' );
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\mbwp_enqueue_editor_assets' );
 
 function register_block() {
-	register_block_type( 'webdevstudios/mapbox-for-wp', [
-		'editor_script'   => 'mapbox_wp',
-		'editor_style'    => 'mapbox_wp',
-		'style'           => 'mapbox_wp',
-		'render_callback' => __NAMESPACE__ . '\render_callback',
-		'attributes'      => [
-			'longitude' => [
-				'type'    => 'number',
-				'default' => 0,
+	register_block_type(
+		'webdevstudios/mapbox-for-wp',
+		[
+			'editor_script'   => 'mapbox_wp',
+			'editor_style'    => 'mapbox_wp',
+			'style'           => 'mapbox_wp',
+			'render_callback' => __NAMESPACE__ . '\render_callback',
+			'attributes'      => [
+				'longitude' => [
+					'type'    => 'number',
+					'default' => 0,
+				],
+				'latitude'  => [
+					'type'    => 'number',
+					'default' => 0,
+				],
+				'zoom'      => [
+					'type'    => 'number',
+					'default' => 0,
+				],
+				'pitch'     => [
+					'type'    => 'number',
+					'default' => 0,
+				],
+				'bearing'   => [
+					'type'    => 'number',
+					'default' => 0,
+				],
+				'style'     => [
+					'type'    => 'string',
+					'default' => '',
+				],
 			],
-			'latitude'  => [
-				'type'    => 'number',
-				'default' => 0,
-			],
-			'zoom'      => [
-				'type'    => 'number',
-				'default' => 0,
-			],
-			'pitch'     => [
-				'type'    => 'number',
-				'default' => 0,
-			],
-			'bearing'   => [
-				'type'    => 'number',
-				'default' => 0,
-			],
-			'style'     => [
-				'type'    => 'string',
-				'default' => '',
-			],
-		],
-	] );
+		]
+	);
 }
 add_action( 'init', __NAMESPACE__ . '\register_block' );

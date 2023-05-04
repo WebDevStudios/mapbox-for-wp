@@ -1,9 +1,9 @@
-import { registerBlockType } from "@wordpress/blocks";
+import { registerBlockType } from '@wordpress/blocks';
 
-import edit from "./edit";
-import json from "./block.json";
+import edit from './edit';
+import json from './block.json';
 
-import "./style.scss";
+import './style.scss';
 
 export const blockStyle = {};
 
@@ -15,28 +15,28 @@ registerBlockType(name, {
 	save: () => null,
 	attributes: {
 		longitude: {
-			type: "number",
+			type: 'number',
 			default: 0,
 		},
 		latitude: {
-			type: "number",
+			type: 'number',
 			default: 0,
 		},
 		zoom: {
-			type: "number",
+			type: 'number',
 			default: 0,
 		},
 		pitch: {
-			type: "number",
+			type: 'number',
 			default: 0,
 		},
 		bearing: {
-			type: "number",
+			type: 'number',
 			default: 0,
 		},
 		style: {
-			type: "string",
-			default: "",
+			type: 'string',
+			default: '',
 		},
 	},
 });

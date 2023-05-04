@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
-import Map from "@core/components/Map/Map";
-import { __ } from "@wordpress/i18n";
-import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
-import { PanelBody, TextControl, RangeControl } from "@wordpress/components";
+import { useState, useEffect } from 'react';
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, TextControl, RangeControl } from '@wordpress/components';
 
-import { blockStyle } from "./index";
-
-const { RawHTML } = wp.element;
+import Map from '../../core/components/Map/Map';
+import { blockStyle } from './index';
 
 export default function edit({ attributes, setAttributes }) {
-	const blockProps = useBlockProps({ style: blockStyle });
-	const { mapboxToken = "", mapboxDefaultStyle = "" } = mbwp_data || {};
+	const blockProps = useBlockProps({ style: blockStyle }); // eslint-disable-line react-hooks/rules-of-hooks
+	const { mapboxToken = '', mapboxDefaultStyle = '' } = mbwpData || {}; // eslint-disable-line no-undef
 
 	const {
 		longitude = 0,
@@ -21,60 +19,70 @@ export default function edit({ attributes, setAttributes }) {
 		style = mapboxDefaultStyle,
 	} = attributes || {};
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [mapAttributes, setMapAttributes] = useState({
-		longitude: 0,
-		latitude: 0,
+		longitude,
+		latitude,
 		zoom,
 		pitch,
 		bearing,
 		style,
 	});
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
 		setAttributes({ ...mapAttributes });
-	}, [mapAttributes]);
+	}, [mapAttributes, setAttributes]);
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__("Map Options")}>
+				<PanelBody title={__('Map Options')}>
 					<RangeControl
-						label={__("Zoom")}
-						value={zoom || 0}
+						label={__('Zoom')}
+						value={zoom}
 						onChange={(newZoom) => setAttributes({ zoom: newZoom })}
 						min={0}
 						max={22}
 					/>
 					<RangeControl
-						label={__("Pitch")}
-						value={pitch || 0}
-						onChange={(newPitch) => setAttributes({ pitch: newPitch })}
+						label={__('Pitch')}
+						value={pitch}
+						onChange={(newPitch) =>
+							setAttributes({ pitch: newPitch })
+						}
 						min={0}
 						max={60}
 					/>
 					<RangeControl
-						label={__("Bearing")}
-						value={bearing || 0}
-						onChange={(newBearing) => setAttributes({ bearing: newBearing })}
+						label={__('Bearing')}
+						value={bearing}
+						onChange={(newBearing) =>
+							setAttributes({ bearing: newBearing })
+						}
 						min={0}
 						max={360}
 					/>
 					<TextControl
-						label={__("Longitude")}
+						label={__('Longitude')}
 						value={longitude}
 						onChange={(newLongitude) =>
 							setAttributes({ longitude: newLongitude })
 						}
 					/>
 					<TextControl
-						label={__("Latitude")}
+						label={__('Latitude')}
 						value={latitude}
-						onChange={(newLatitude) => setAttributes({ latitude: newLatitude })}
+						onChange={(newLatitude) =>
+							setAttributes({ latitude: newLatitude })
+						}
 					/>
 					<TextControl
-						label={__("Style")}
+						label={__('Style')}
 						value={style}
-						onChange={(newStyle) => setAttributes({ style: newStyle })}
+						onChange={(newStyle) =>
+							setAttributes({ style: newStyle })
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>

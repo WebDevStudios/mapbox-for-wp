@@ -14,10 +14,15 @@
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start"
 	},
-	"devDependencies": {
-		"@wordpress/scripts": "^26.1.0"
-	},
 	"dependencies": {
-		"mapbox-gl": "^2.14.0"
+		"mapbox-gl": "^2.14.0",
+		"react": "^18.2.0"
+	},
+	"devDependencies": {
+		"@wordpress/prettier-config": "^2.15.0",
+		"@wordpress/scripts": "^26.1.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"prettier": "^2.8.8"
 	}
 }

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import Map from "./components/Map/Map";
+import Map from './components/Map/Map';
 
 const App = () => {
-	const { mapboxToken = "", mapboxDefaultStyle = "" } = mbwp_data || {};
+	const { mapboxToken = '', mapboxDefaultStyle = '' } = mbwpData || {}; // eslint-disable-line no-undef
 
 	const [mapboxLongitude, setMapboxLongitude] = useState(0);
 	const [mapboxLatitude, setMapboxLatitude] = useState(0);
@@ -13,16 +13,16 @@ const App = () => {
 	const [mapboxStyle, setMapboxStyle] = useState(mapboxDefaultStyle);
 
 	useEffect(() => {
-		const mapboxForWP = document.getElementById("mapbox-for-wp");
+		const mapboxForWP = document.getElementById('mapbox-for-wp');
 
-		const longitude = mapboxForWP.getAttribute("data-longitude") || 0;
-		const latitude = mapboxForWP.getAttribute("data-latitude") || 0;
-		const zoom = mapboxForWP.getAttribute("data-zoom") || 0;
-		const pitch = mapboxForWP.getAttribute("data-pitch") || 0;
-		const bearing = mapboxForWP.getAttribute("data-bearing") || 0;
+		const longitude = mapboxForWP.getAttribute('data-longitude') || 0;
+		const latitude = mapboxForWP.getAttribute('data-latitude') || 0;
+		const zoom = mapboxForWP.getAttribute('data-zoom') || 0;
+		const pitch = mapboxForWP.getAttribute('data-pitch') || 0;
+		const bearing = mapboxForWP.getAttribute('data-bearing') || 0;
 
 		const style =
-			decodeURIComponent(mapboxForWP.getAttribute("data-style")) ||
+			decodeURIComponent(mapboxForWP.getAttribute('data-style')) ||
 			mapboxDefaultStyle;
 
 		setMapboxLongitude(longitude);
@@ -39,6 +39,7 @@ const App = () => {
 		mapboxPitch,
 		mapboxBearing,
 		mapboxStyle,
+		mapboxDefaultStyle,
 	]);
 
 	return (

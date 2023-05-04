@@ -1,13 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
-import mapboxgl from "mapbox-gl";
-
-import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = (props) => {
 	const {
-		mapboxToken = "",
-		mapboxStyle = "",
+		mapboxToken = '',
+		mapboxStyle = '',
 		mapboxLongitude = 0,
 		mapboxLatitude = 0,
 		mapboxZoom = 0,
@@ -36,7 +35,7 @@ const Map = (props) => {
 		map.current.addControl(new mapboxgl.NavigationControl());
 		map.current.addControl(new mapboxgl.FullscreenControl());
 
-		map.current.on("moveend", () => {
+		map.current.on('moveend', () => {
 			const { lng: longitude, lat: latitude } = map.current.getCenter();
 			const zoom = map.current.getZoom();
 			const pitch = map.current.getPitch();
@@ -44,14 +43,24 @@ const Map = (props) => {
 
 			updateCallback({ longitude, latitude, zoom, pitch, bearing });
 		});
-
-		return () => map.current.remove();
-	}, [map]);
+	}, [
+		map,
+		mapboxBearing,
+		mapboxLatitude,
+		mapboxLongitude,
+		mapboxPitch,
+		mapboxStyle,
+		mapboxToken,
+		mapboxZoom,
+		updateCallback,
+	]);
 
 	useEffect(() => {
 		if (!map.current) return;
 
-		map.current.setCenter(new mapboxgl.LngLat(mapboxLongitude, mapboxLatitude));
+		map.current.setCenter(
+			new mapboxgl.LngLat(mapboxLongitude, mapboxLatitude)
+		);
 	}, [mapboxLongitude, mapboxLatitude]);
 
 	useEffect(() => {
@@ -80,8 +89,11 @@ const Map = (props) => {
 
 	return (
 		<div>
-			<div className="map-container" style={{ height: "500px" }}>
-				<div ref={mapContainer} style={{ width: "100%", height: "100%" }} />
+			<div className="map-container" style={{ height: '500px' }}>
+				<div
+					ref={mapContainer}
+					style={{ width: '100%', height: '100%' }}
+				/>
 			</div>
 		</div>
 	);

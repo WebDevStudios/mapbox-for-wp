@@ -65,6 +65,7 @@ class Settings {
 	/**
 	 * Execute our hooks
 	 * .
+	 *
 	 * @since 1.0.0
 	 */
 	public function do_hooks() {
@@ -135,7 +136,7 @@ class Settings {
 			[
 				'label_for' => 'mbwp_public_token',
 				'value'     => $this->options['public_token'],
-				'classes'   => 'regular-text'
+				'classes'   => 'regular-text',
 			]
 		);
 
@@ -198,14 +199,16 @@ class Settings {
 		?>
 		<label for="<?php echo $args['label_for']; ?>">
 			<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
-				<?php foreach( $args['styles'] as $value => $name ) {
+				<?php
+				foreach ( $args['styles'] as $value => $name ) {
 					printf(
 						'<option value="%s" %s>%s</option>',
 						esc_attr( $value ),
 						selected( $this->options['default_style'], $value, false ),
 						esc_html( $name )
 					);
-				} ?>
+				}
+				?>
 			</select>
 		</label>
 		<?php
@@ -218,7 +221,8 @@ class Settings {
 	 */
 	public function settings_callback() {
 		?>
-			<p><?php
+			<p>
+			<?php
 				printf(
 					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
 					sprintf(
@@ -227,7 +231,8 @@ class Settings {
 						esc_html__( 'Mapbox Styles API', 'mapbox-for-wp' )
 					)
 				);
-			?></p>
+			?>
+			</p>
 		<?php
 	}
 
