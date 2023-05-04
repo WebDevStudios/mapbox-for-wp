@@ -2,54 +2,49 @@
 Contributors:      WebDevStudios, williamsba1, tw2113, scottbasgaard
 Tags:              mapbox, block
 Tested up to:      6.2
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Requires at least: 6.2
+Requires PHP:      7.4
 
-Integrate your maps from Mapbox in to WordPress
+Display and integrate Mapbox Maps.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Display and integrate maps from your [Mapbox](https://www.mapbox.com/) account.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+== Frequently Asked Questions ==
+
+= Do I need to have a Mapbox account? =
+
+Yes, you can sign up for an account over at [Mapbox Signup](https://account.mapbox.com/auth/signup/).
+
+= Where can I find my public token? =
+
+You should see an "Access tokens" section when you've logged in and visit your [Mapbox account](https://account.mapbox.com/) page.
+
+= How do I find the value to use for my custom style? =
+
+You should be able to visit [Mapbox Studio](https://studio.mapbox.com/) and click the 3 dots on the righthand side of each style listed. In the popup that appears, there should be a "Style URL" field at the end and a "copy to clipboard" button. You will want that entire value.
+
+= Are you officially affiliated with Mapbox? =
+
+No, we do not have official affiliation. We are fans of their platform though.
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 1. Upload the plugin files to the `/wp-content/plugins/mapbox-for-wp` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
 
 == Changelog ==
 
-= 0.1.0 =
-* Release
+= 1.0.0 =
+* Initial release
 
-== Arbitrary section ==
+== Upgrade Notice ==
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+= 1.0.0 =
+* Initial release.
