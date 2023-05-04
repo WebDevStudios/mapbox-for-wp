@@ -62,7 +62,7 @@
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-			<property name="prefixes" type="array" value="webdevstudios,wds,wpswa,algolia"/>
+			<property name="prefixes" type="array" value="webdevstudios,wds,mbwp"/>
 		</properties>
 	</rule>
 
@@ -104,6 +104,6 @@
 	<rule ref="PHPCompatibilityWP"/>
 
 	<!-- WPSWA currently supports PHP 7.2+. -->
-	<config name="testVersion" value="7.2-"/>
+	<config name="testVersion" value="7.4-"/>
 
 </ruleset>
