@@ -1,5 +1,12 @@
 <?php
 /**
+ * Mapbox for WP
+ *
+ * @package Mapbox for WP
+ * @since 1.0.0
+ */
+
+/**
  * Plugin Name:       Mapbox For WP
  * Description:       Integrate your maps from Mapbox in to WordPress.
  * Requires at least: 6.2
@@ -30,6 +37,14 @@ require_once 'vendor/autoload.php';
 $mbwp = MBWP_Factory::create();
 $mbwp->do_hooks();
 
+/**
+ * Render our map div container with attributes.
+ *
+ * @since 1.0.0
+ *
+ * @param array $atts Array of block attributes.
+ * @return false|string
+ */
 function render_callback( $atts ) {
 	$longitude = floatval( $atts['longitude'] );
 	$latitude  = floatval( $atts['latitude'] );
@@ -52,8 +67,13 @@ function render_callback( $atts ) {
 	return ob_get_clean();
 }
 
+/**
+ * Enqueue our assets.
+ *
+ * @since 1.0.0
+ */
 function enqueue_scripts() {
-	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
+	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : wp_rand();
 	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.css', [], $version );
 	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-core.js', [ 'wp-element' ], $version, true );
 
@@ -70,8 +90,13 @@ function enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_scripts' );
 
+/**
+ * Enqueue our editor assets.
+ *
+ * @since 1.0.0
+ */
 function mbwp_enqueue_editor_assets() {
-	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : rand();
+	$version = ( 'production' === wp_get_environment_type() ) ? MBWP_VERSION : wp_rand();
 	wp_enqueue_style( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.css', [], $version );
 	wp_register_script( 'mapbox_wp', plugin_dir_url( __FILE__ ) . 'build/map-block.js', [ 'wp-blocks', 'wp-i18n', 'wp-element' ], $version, true );
 
@@ -88,6 +113,11 @@ function mbwp_enqueue_editor_assets() {
 }
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\mbwp_enqueue_editor_assets' );
 
+/**
+ * Register our block.
+ *
+ * @since 1.0.0
+ */
 function register_block() {
 	register_block_type(
 		'webdevstudios/mapbox-for-wp',

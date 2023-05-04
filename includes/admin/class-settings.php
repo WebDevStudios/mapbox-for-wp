@@ -65,7 +65,6 @@ class Settings {
 	/**
 	 * Execute our hooks.
 	 *
-	 *
 	 * @since 1.0.0
 	 */
 	public function do_hooks() {
@@ -182,7 +181,7 @@ class Settings {
 	 */
 	public function render_text( array $args ) {
 		?>
-		<label for="<?php echo $args['label_for']; ?>">
+		<label for="<?php echo esc_attr( $args['label_for'] ); ?>">
 			<input class="<?php echo esc_attr( $args['classes'] ); ?>" type="text" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>"/>
 		</label>
 		<?php
@@ -197,7 +196,7 @@ class Settings {
 	 */
 	public function render_dropdown( array $args ) {
 		?>
-		<label for="<?php echo $args['label_for']; ?>">
+		<label for="<?php echo esc_attr( $args['label_for'] ); ?>">
 			<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
 				<?php
 				foreach ( $args['styles'] as $value => $name ) {
@@ -224,6 +223,7 @@ class Settings {
 			<p>
 			<?php
 				printf(
+					// translators: Placeholder is for html link after escaping.
 					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
 					sprintf(
 						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',

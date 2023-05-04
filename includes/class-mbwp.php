@@ -1,4 +1,10 @@
 <?php
+/**
+ * Main class file.
+ *
+ * @package WebDevStudios\MBWP
+ * @since   1.0.0
+ */
 
 namespace WebDevStudios\MBWP;
 
