@@ -157,9 +157,10 @@ class Settings {
 			$this->slug,
 			$this->section,
 			[
-				'label_for' => 'mbwp_default_style',
-				'value'     => $this->options['default_style'],
-				'styles'    => $this->get_styles(),
+				'label_for'   => 'mbwp_default_style',
+				'value'       => $this->options['default_style'],
+				'styles'      => $this->get_styles(),
+				'extra_label' => esc_html__( 'Options come from Mapbox available defaults.', 'mapbox-for-wp' ),
 			]
 		);
 
@@ -184,6 +185,7 @@ class Settings {
 		<label for="<?php echo esc_attr( $args['label_for'] ); ?>">
 			<input class="<?php echo esc_attr( $args['classes'] ); ?>" type="text" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="<?php echo esc_attr( $args['value'] ); ?>"/>
 		</label>
+
 		<?php
 	}
 
@@ -195,6 +197,7 @@ class Settings {
 	 * @param array $args array of extra arguments.
 	 */
 	public function render_dropdown( array $args ) {
+		$extra_label = ! empty( $args['extra_label'] ) ? $args['extra_label'] : '';
 		?>
 		<label for="<?php echo esc_attr( $args['label_for'] ); ?>">
 			<select name="<?php echo esc_attr( $args['label_for'] ); ?>" id="<?php echo esc_attr( $args['label_for'] ); ?>">
@@ -210,6 +213,7 @@ class Settings {
 				?>
 			</select>
 		</label>
+		<p><?php echo esc_html( $extra_label ); ?></p>
 		<?php
 	}
 
