@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { __ } from '@wordpress/i18n';
 
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -12,6 +13,7 @@ const Map = (props) => {
 		mapboxZoom = 0,
 		mapboxPitch = 0,
 		mapboxBearing = 0,
+		showControls = true,
 		updateCallback = () => {},
 	} = props;
 
@@ -31,9 +33,6 @@ const Map = (props) => {
 			pitch: mapboxPitch,
 			bearing: mapboxBearing,
 		});
-
-		map.current.addControl(new mapboxgl.NavigationControl());
-		map.current.addControl(new mapboxgl.FullscreenControl());
 
 		map.current.on('moveend', () => {
 			const { lng: longitude, lat: latitude } = map.current.getCenter();
@@ -87,6 +86,23 @@ const Map = (props) => {
 		map.current.setStyle(mapboxStyle);
 	}, [mapboxStyle]);
 
+	useEffect(() => {
+		if (!map.current) return;
+
+		if (showControls) {
+			const navControl = new mapboxgl.NavigationControl();
+			const fullscreenControl = new mapboxgl.FullscreenControl();
+
+			map.current.addControl(navControl);
+			map.current.addControl(fullscreenControl);
+
+			return () => {
+				map.current.removeControl(navControl);
+				map.current.removeControl(fullscreenControl);
+			};
+		}
+	}, [showControls]);
+
 	if (!mapboxToken) {
 		return (
 			<div>
@@ -106,4 +122,5 @@ const Map = (props) => {
 		</div>
 	);
 };
+
 export default Map;

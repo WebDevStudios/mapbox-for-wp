@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Map from './components/Map/Map';
+import StaticMap from './components/Map/StaticMap';
 
 const App = () => {
 	const { mapboxToken = '', mapboxDefaultStyle = '' } = mbwpData || {}; // eslint-disable-line no-undef
@@ -11,6 +12,8 @@ const App = () => {
 	const [mapboxPitch, setMapboxPitch] = useState(0);
 	const [mapboxBearing, setMapboxBearing] = useState(0);
 	const [mapboxStyle, setMapboxStyle] = useState(mapboxDefaultStyle);
+	const [mapboxShowControls, setMapboxShowControls] = useState(true);
+	const [mapboxStatic, setMapboxStatic] = useState(false);
 
 	useEffect(() => {
 		const mapboxForWP = document.getElementById('mapbox-for-wp');
@@ -25,6 +28,11 @@ const App = () => {
 			decodeURIComponent(mapboxForWP.getAttribute('data-style')) ||
 			mapboxDefaultStyle;
 
+		const showControls =
+			mapboxForWP.getAttribute('data-show-controls') || true;
+
+		const staticMap = mapboxForWP.getAttribute('data-static-map') || false;
+
 		setMapboxLongitude(longitude);
 		setMapboxLatitude(latitude);
 		setMapboxZoom(zoom);
@@ -32,6 +40,9 @@ const App = () => {
 		setMapboxBearing(bearing);
 
 		setMapboxStyle(style);
+
+		setMapboxShowControls(showControls);
+		setMapboxStatic(staticMap);
 	}, [
 		mapboxLongitude,
 		mapboxLatitude,
@@ -40,7 +51,26 @@ const App = () => {
 		mapboxBearing,
 		mapboxStyle,
 		mapboxDefaultStyle,
+		mapboxShowControls,
+		mapboxStatic,
 	]);
+
+	if (mapboxStatic) {
+		return (
+			<div>
+				<StaticMap
+					mapboxToken={mapboxToken}
+					mapboxStyle={mapboxStyle}
+					mapboxLongitude={mapboxLongitude}
+					mapboxLatitude={mapboxLatitude}
+					mapboxZoom={mapboxZoom}
+					mapboxPitch={mapboxPitch}
+					mapboxBearing={mapboxBearing}
+					mapboxShowControls={mapboxShowControls}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div>

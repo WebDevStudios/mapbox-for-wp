@@ -38,5 +38,13 @@ registerBlockType(name, {
 			type: 'string',
 			default: '',
 		},
+		showControls: {
+			type: 'boolean',
+			default: true,
+		},
+		staticMap: {
+			type: 'boolean',
+			default: false,
+		},
 	},
 });

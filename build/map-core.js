@@ -14,6 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_Map_Map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Map/Map */ "./src/core/components/Map/Map.js");
+/* harmony import */ var _components_Map_StaticMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Map/StaticMap */ "./src/core/components/Map/StaticMap.js");
+
 
 
 
@@ -29,6 +31,8 @@ const App = () => {
   const [mapboxPitch, setMapboxPitch] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxBearing, setMapboxBearing] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [mapboxStyle, setMapboxStyle] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(mapboxDefaultStyle);
+  const [mapboxShowControls, setMapboxShowControls] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
+  const [mapboxStatic, setMapboxStatic] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     const mapboxForWP = document.getElementById('mapbox-for-wp');
     const longitude = mapboxForWP.getAttribute('data-longitude') || 0;
@@ -37,13 +41,29 @@ const App = () => {
     const pitch = mapboxForWP.getAttribute('data-pitch') || 0;
     const bearing = mapboxForWP.getAttribute('data-bearing') || 0;
     const style = decodeURIComponent(mapboxForWP.getAttribute('data-style')) || mapboxDefaultStyle;
+    const showControls = mapboxForWP.getAttribute('data-show-controls') || true;
+    const staticMap = mapboxForWP.getAttribute('data-static-map') || false;
     setMapboxLongitude(longitude);
     setMapboxLatitude(latitude);
     setMapboxZoom(zoom);
     setMapboxPitch(pitch);
     setMapboxBearing(bearing);
     setMapboxStyle(style);
-  }, [mapboxLongitude, mapboxLatitude, mapboxZoom, mapboxPitch, mapboxBearing, mapboxStyle, mapboxDefaultStyle]);
+    setMapboxShowControls(showControls);
+    setMapboxStatic(staticMap);
+  }, [mapboxLongitude, mapboxLatitude, mapboxZoom, mapboxPitch, mapboxBearing, mapboxStyle, mapboxDefaultStyle, mapboxShowControls, mapboxStatic]);
+  if (mapboxStatic) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_StaticMap__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      mapboxToken: mapboxToken,
+      mapboxStyle: mapboxStyle,
+      mapboxLongitude: mapboxLongitude,
+      mapboxLatitude: mapboxLatitude,
+      mapboxZoom: mapboxZoom,
+      mapboxPitch: mapboxPitch,
+      mapboxBearing: mapboxBearing,
+      mapboxShowControls: mapboxShowControls
+    }));
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Map_Map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     mapboxToken: mapboxToken,
     mapboxStyle: mapboxStyle,
@@ -70,9 +90,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mapbox-gl */ "./node_modules/mapbox-gl/dist/mapbox-gl.js");
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var mapbox_gl_dist_mapbox_gl_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mapbox-gl/dist/mapbox-gl.css */ "./node_modules/mapbox-gl/dist/mapbox-gl.css");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mapbox-gl */ "./node_modules/mapbox-gl/dist/mapbox-gl.js");
+/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var mapbox_gl_dist_mapbox_gl_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! mapbox-gl/dist/mapbox-gl.css */ "./node_modules/mapbox-gl/dist/mapbox-gl.css");
+
 
 
 
@@ -86,14 +109,15 @@ const Map = props => {
     mapboxZoom = 0,
     mapboxPitch = 0,
     mapboxBearing = 0,
+    showControls = true,
     updateCallback = () => {}
   } = props;
   const mapContainer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   const map = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (map.current || !mapboxToken) return;
-    (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().accessToken) = mapboxToken;
-    map.current = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().Map)({
+    (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().accessToken) = mapboxToken;
+    map.current = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().Map)({
       container: mapContainer.current,
       style: mapboxStyle,
       center: [mapboxLongitude, mapboxLatitude],
@@ -101,8 +125,6 @@ const Map = props => {
       pitch: mapboxPitch,
       bearing: mapboxBearing
     });
-    map.current.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().NavigationControl)());
-    map.current.addControl(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().FullscreenControl)());
     map.current.on('moveend', () => {
       const {
         lng: longitude,
@@ -122,7 +144,7 @@ const Map = props => {
   }, [map, mapboxBearing, mapboxLatitude, mapboxLongitude, mapboxPitch, mapboxStyle, mapboxToken, mapboxZoom, updateCallback]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!map.current) return;
-    map.current.setCenter(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().LngLat)(mapboxLongitude, mapboxLatitude));
+    map.current.setCenter(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().LngLat)(mapboxLongitude, mapboxLatitude));
   }, [mapboxLongitude, mapboxLatitude]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!map.current) return;
@@ -140,8 +162,21 @@ const Map = props => {
     if (!map.current) return;
     map.current.setStyle(mapboxStyle);
   }, [mapboxStyle]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!map.current) return;
+    if (showControls) {
+      const navControl = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().NavigationControl)();
+      const fullscreenControl = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().FullscreenControl)();
+      map.current.addControl(navControl);
+      map.current.addControl(fullscreenControl);
+      return () => {
+        map.current.removeControl(navControl);
+        map.current.removeControl(fullscreenControl);
+      };
+    }
+  }, [showControls]);
   if (!mapboxToken) {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Mapbox not configured.', 'mapbox-for-wp')));
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Mapbox not configured.', 'mapbox-for-wp')));
   }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "map-container",
@@ -157,6 +192,41 @@ const Map = props => {
   })));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Map);
+
+/***/ }),
+
+/***/ "./src/core/components/Map/StaticMap.js":
+/*!**********************************************!*\
+  !*** ./src/core/components/Map/StaticMap.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const StaticMap = props => {
+  const {
+    mapboxToken = '',
+    mapboxStyle = '',
+    mapboxLongitude = 0,
+    mapboxLatitude = 0,
+    mapboxZoom = 0,
+    mapboxPitch = 0,
+    mapboxBearing = 0
+  } = props;
+  const userStyle = mapboxStyle.replace(/^mapbox:\/\/styles\//, '');
+  const imageUrl = `https://api.mapbox.com/styles/v1/${userStyle}/static/${mapboxLongitude},${mapboxLatitude},${mapboxZoom},${mapboxBearing},${mapboxPitch}/1000x1000?access_token=${mapboxToken}`;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    style: {
+      width: '100%'
+    },
+    src: imageUrl,
+    alt: "Map"
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (StaticMap);
 
 /***/ }),
 
@@ -246,6 +316,17 @@ module.exports = window["React"];
 
 "use strict";
 module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = window["wp"]["i18n"];
 
 /***/ })
 

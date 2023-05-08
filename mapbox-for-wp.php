@@ -46,12 +46,14 @@ $mbwp->do_hooks();
  * @return false|string
  */
 function render_callback( $atts ) {
-	$longitude = floatval( $atts['longitude'] );
-	$latitude  = floatval( $atts['latitude'] );
-	$zoom      = floatval( $atts['zoom'] );
-	$pitch     = floatval( $atts['pitch'] );
-	$bearing   = floatval( $atts['bearing'] );
-	$style     = $atts['style'];
+	$longitude     = floatval( $atts['longitude'] );
+	$latitude      = floatval( $atts['latitude'] );
+	$zoom          = floatval( $atts['zoom'] );
+	$pitch         = floatval( $atts['pitch'] );
+	$bearing       = floatval( $atts['bearing'] );
+	$style         = $atts['style'];
+	$show_controls = $atts['showControls'];
+	$static_map    = $atts['staticMap'];
 
 	ob_start();
 	?>
@@ -61,7 +63,9 @@ function render_callback( $atts ) {
 		data-zoom="<?php echo esc_attr( $zoom ); ?>"
 		data-pitch="<?php echo esc_attr( $pitch ); ?>"
 		data-bearing="<?php echo esc_attr( $bearing ); ?>"
-		data-style="<?php echo esc_attr( $style ); ?>">
+		data-style="<?php echo esc_attr( $style ); ?>"
+		data-show-controls="<?php echo esc_attr( $show_controls ); ?>"
+		data-static-map="<?php echo esc_attr( $static_map ); ?>">
 	</div>
 	<?php
 	return ob_get_clean();
@@ -127,29 +131,37 @@ function register_block() {
 			'style'           => 'mapbox_wp',
 			'render_callback' => __NAMESPACE__ . '\render_callback',
 			'attributes'      => [
-				'longitude' => [
+				'longitude'    => [
 					'type'    => 'number',
 					'default' => 0,
 				],
-				'latitude'  => [
+				'latitude'     => [
 					'type'    => 'number',
 					'default' => 0,
 				],
-				'zoom'      => [
+				'zoom'         => [
 					'type'    => 'number',
 					'default' => 0,
 				],
-				'pitch'     => [
+				'pitch'        => [
 					'type'    => 'number',
 					'default' => 0,
 				],
-				'bearing'   => [
+				'bearing'      => [
 					'type'    => 'number',
 					'default' => 0,
 				],
-				'style'     => [
+				'style'        => [
 					'type'    => 'string',
 					'default' => '',
+				],
+				'showControls' => [
+					'type'    => 'boolean',
+					'default' => true,
+				],
+				'staticMap'    => [
+					'type'    => 'boolean',
+					'default' => false,
 				],
 			],
 		]
