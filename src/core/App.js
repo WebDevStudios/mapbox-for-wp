@@ -12,7 +12,7 @@ const App = () => {
 	const [mapboxPitch, setMapboxPitch] = useState(0);
 	const [mapboxBearing, setMapboxBearing] = useState(0);
 	const [mapboxStyle, setMapboxStyle] = useState(mapboxDefaultStyle);
-	const [mapboxShowControls, setMapboxShowControls] = useState(true);
+	const [mapboxHideControls, setMapboxHideControls] = useState(false);
 	const [mapboxStatic, setMapboxStatic] = useState(false);
 
 	useEffect(() => {
@@ -28,8 +28,8 @@ const App = () => {
 			decodeURIComponent(mapboxForWP.getAttribute('data-style')) ||
 			mapboxDefaultStyle;
 
-		const showControls =
-			mapboxForWP.getAttribute('data-show-controls') || true;
+		const hideControls =
+			mapboxForWP.getAttribute('data-hide-controls') || false;
 
 		const staticMap = mapboxForWP.getAttribute('data-static-map') || false;
 
@@ -41,7 +41,7 @@ const App = () => {
 
 		setMapboxStyle(style);
 
-		setMapboxShowControls(showControls);
+		setMapboxHideControls(hideControls);
 		setMapboxStatic(staticMap);
 	}, [
 		mapboxLongitude,
@@ -51,7 +51,7 @@ const App = () => {
 		mapboxBearing,
 		mapboxStyle,
 		mapboxDefaultStyle,
-		mapboxShowControls,
+		mapboxHideControls,
 		mapboxStatic,
 	]);
 
@@ -66,7 +66,6 @@ const App = () => {
 					mapboxZoom={mapboxZoom}
 					mapboxPitch={mapboxPitch}
 					mapboxBearing={mapboxBearing}
-					mapboxShowControls={mapboxShowControls}
 				/>
 			</div>
 		);
@@ -82,6 +81,7 @@ const App = () => {
 				mapboxZoom={mapboxZoom}
 				mapboxPitch={mapboxPitch}
 				mapboxBearing={mapboxBearing}
+				mapboxHideControls={mapboxHideControls}
 			/>
 		</div>
 	);

@@ -51,7 +51,7 @@ function edit(_ref) {
     pitch = 0,
     bearing = 0,
     style = mapboxDefaultStyle,
-    showControls = true,
+    hideControls = false,
     staticMap = false
   } = attributes || {};
 
@@ -63,7 +63,7 @@ function edit(_ref) {
     pitch,
     bearing,
     style,
-    showControls,
+    hideControls,
     staticMap
   });
 
@@ -118,10 +118,10 @@ function edit(_ref) {
       style: newStyle
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Show Controls', 'mapbox-for-wordpress'),
-    checked: showControls,
-    onChange: newShowControls => setMapAttributes({
-      showControls: newShowControls
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide Controls', 'mapbox-for-wordpress'),
+    checked: hideControls,
+    onChange: newHideControls => setMapAttributes({
+      hideControls: newHideControls
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Static Map', 'mapbox-for-wordpress'),
@@ -137,7 +137,7 @@ function edit(_ref) {
     mapboxZoom: zoom,
     mapboxPitch: pitch,
     mapboxBearing: bearing,
-    showControls: showControls,
+    mapboxHideControls: hideControls,
     updateCallback: setMapAttributes
   })));
 }
@@ -197,9 +197,9 @@ const {
       type: 'string',
       default: ''
     },
-    showControls: {
+    hideControls: {
       type: 'boolean',
-      default: true
+      default: false
     },
     staticMap: {
       type: 'boolean',
@@ -241,13 +241,17 @@ const Map = props => {
     mapboxZoom = 0,
     mapboxPitch = 0,
     mapboxBearing = 0,
-    showControls = true,
+    mapboxHideControls = false,
     updateCallback = () => {}
   } = props;
   const mapContainer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   const map = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  const [mapReady, setMapReady] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (map.current || !mapboxToken) return;
+    if (mapboxLongitude === 0 && mapboxLatitude === 0) {
+      return;
+    }
     (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().accessToken) = mapboxToken;
     map.current = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().Map)({
       container: mapContainer.current,
@@ -273,30 +277,31 @@ const Map = props => {
         bearing
       });
     });
+    setMapReady(true);
   }, [map, mapboxBearing, mapboxLatitude, mapboxLongitude, mapboxPitch, mapboxStyle, mapboxToken, mapboxZoom, updateCallback]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
+    if (!mapReady) return;
     map.current.setCenter(new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().LngLat)(mapboxLongitude, mapboxLatitude));
-  }, [mapboxLongitude, mapboxLatitude]);
+  }, [mapboxLongitude, mapboxLatitude, mapReady]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
+    if (!mapReady) return;
     map.current.setZoom(mapboxZoom);
-  }, [mapboxZoom]);
+  }, [mapboxZoom, mapReady]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
+    if (!mapReady) return;
     map.current.setPitch(mapboxPitch);
-  }, [mapboxPitch]);
+  }, [mapboxPitch, mapReady]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
+    if (!mapReady) return;
     map.current.setBearing(mapboxBearing);
-  }, [mapboxBearing]);
+  }, [mapboxBearing, mapReady]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
+    if (!mapReady) return;
     map.current.setStyle(mapboxStyle);
-  }, [mapboxStyle]);
+  }, [mapboxStyle, mapReady]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!map.current) return;
-    if (showControls) {
+    if (!mapReady) return;
+    if (!mapboxHideControls) {
       const navControl = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().NavigationControl)();
       const fullscreenControl = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_3___default().FullscreenControl)();
       map.current.addControl(navControl);
@@ -306,7 +311,7 @@ const Map = props => {
         map.current.removeControl(fullscreenControl);
       };
     }
-  }, [showControls]);
+  }, [mapboxHideControls, mapReady]);
   if (!mapboxToken) {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Mapbox not configured.', 'mapbox-for-wp')));
   }

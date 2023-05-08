@@ -52,7 +52,7 @@ function render_callback( $atts ) {
 	$pitch         = floatval( $atts['pitch'] );
 	$bearing       = floatval( $atts['bearing'] );
 	$style         = $atts['style'];
-	$show_controls = $atts['showControls'];
+	$hide_controls = $atts['hideControls'];
 	$static_map    = $atts['staticMap'];
 
 	ob_start();
@@ -64,7 +64,7 @@ function render_callback( $atts ) {
 		data-pitch="<?php echo esc_attr( $pitch ); ?>"
 		data-bearing="<?php echo esc_attr( $bearing ); ?>"
 		data-style="<?php echo esc_attr( $style ); ?>"
-		data-show-controls="<?php echo esc_attr( $show_controls ); ?>"
+		data-hide-controls="<?php echo esc_attr( $hide_controls ); ?>"
 		data-static-map="<?php echo esc_attr( $static_map ); ?>">
 	</div>
 	<?php
@@ -155,9 +155,9 @@ function register_block() {
 					'type'    => 'string',
 					'default' => '',
 				],
-				'showControls' => [
+				'hideControls' => [
 					'type'    => 'boolean',
-					'default' => true,
+					'default' => false,
 				],
 				'staticMap'    => [
 					'type'    => 'boolean',

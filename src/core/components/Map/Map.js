@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 
 import mapboxgl from 'mapbox-gl';
@@ -13,15 +13,20 @@ const Map = (props) => {
 		mapboxZoom = 0,
 		mapboxPitch = 0,
 		mapboxBearing = 0,
-		showControls = true,
+		mapboxHideControls = false,
 		updateCallback = () => {},
 	} = props;
 
 	const mapContainer = useRef(null);
 	const map = useRef(null);
+	const [mapReady, setMapReady] = useState(false);
 
 	useEffect(() => {
 		if (map.current || !mapboxToken) return;
+
+		if (mapboxLongitude === 0 && mapboxLatitude === 0) {
+			return;
+		}
 
 		mapboxgl.accessToken = mapboxToken;
 
@@ -42,6 +47,8 @@ const Map = (props) => {
 
 			updateCallback({ longitude, latitude, zoom, pitch, bearing });
 		});
+
+		setMapReady(true);
 	}, [
 		map,
 		mapboxBearing,
@@ -55,41 +62,41 @@ const Map = (props) => {
 	]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
 		map.current.setCenter(
 			new mapboxgl.LngLat(mapboxLongitude, mapboxLatitude)
 		);
-	}, [mapboxLongitude, mapboxLatitude]);
+	}, [mapboxLongitude, mapboxLatitude, mapReady]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
 		map.current.setZoom(mapboxZoom);
-	}, [mapboxZoom]);
+	}, [mapboxZoom, mapReady]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
 		map.current.setPitch(mapboxPitch);
-	}, [mapboxPitch]);
+	}, [mapboxPitch, mapReady]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
 		map.current.setBearing(mapboxBearing);
-	}, [mapboxBearing]);
+	}, [mapboxBearing, mapReady]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
 		map.current.setStyle(mapboxStyle);
-	}, [mapboxStyle]);
+	}, [mapboxStyle, mapReady]);
 
 	useEffect(() => {
-		if (!map.current) return;
+		if (!mapReady) return;
 
-		if (showControls) {
+		if (!mapboxHideControls) {
 			const navControl = new mapboxgl.NavigationControl();
 			const fullscreenControl = new mapboxgl.FullscreenControl();
 
@@ -101,7 +108,7 @@ const Map = (props) => {
 				map.current.removeControl(fullscreenControl);
 			};
 		}
-	}, [showControls]);
+	}, [mapboxHideControls, mapReady]);
 
 	if (!mapboxToken) {
 		return (

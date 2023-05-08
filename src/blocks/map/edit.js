@@ -22,7 +22,7 @@ export default function edit({ attributes, setAttributes }) {
 		pitch = 0,
 		bearing = 0,
 		style = mapboxDefaultStyle,
-		showControls = true,
+		hideControls = false,
 		staticMap = false,
 	} = attributes || {};
 
@@ -34,7 +34,7 @@ export default function edit({ attributes, setAttributes }) {
 		pitch,
 		bearing,
 		style,
-		showControls,
+		hideControls,
 		staticMap,
 	});
 
@@ -94,11 +94,11 @@ export default function edit({ attributes, setAttributes }) {
 						}
 					/>
 					<ToggleControl
-						label={__('Show Controls', 'mapbox-for-wordpress')}
-						checked={showControls}
-						onChange={(newShowControls) =>
+						label={__('Hide Controls', 'mapbox-for-wordpress')}
+						checked={hideControls}
+						onChange={(newHideControls) =>
 							setMapAttributes({
-								showControls: newShowControls,
+								hideControls: newHideControls,
 							})
 						}
 					/>
@@ -120,7 +120,7 @@ export default function edit({ attributes, setAttributes }) {
 					mapboxZoom={zoom}
 					mapboxPitch={pitch}
 					mapboxBearing={bearing}
-					showControls={showControls}
+					mapboxHideControls={hideControls}
 					updateCallback={setMapAttributes}
 				/>
 			</div>

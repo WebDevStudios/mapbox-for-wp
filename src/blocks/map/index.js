@@ -38,9 +38,9 @@ registerBlockType(name, {
 			type: 'string',
 			default: '',
 		},
-		showControls: {
+		hideControls: {
 			type: 'boolean',
-			default: true,
+			default: false,
 		},
 		staticMap: {
 			type: 'boolean',
