@@ -19,7 +19,7 @@ const Map = (props) => {
 	const map = useRef(null);
 
 	useEffect(() => {
-		if (map.current) return;
+		if (map.current || !mapboxToken) return;
 
 		mapboxgl.accessToken = mapboxToken;
 
@@ -86,6 +86,14 @@ const Map = (props) => {
 
 		map.current.setStyle(mapboxStyle);
 	}, [mapboxStyle]);
+
+	if (!mapboxToken) {
+		return (
+			<div>
+				<p>{__('Mapbox not configured.', 'mapbox-for-wp')}</p>
+			</div>
+		);
+	}
 
 	return (
 		<div>

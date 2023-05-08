@@ -218,7 +218,7 @@ const Map = props => {
   const mapContainer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   const map = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (map.current) return;
+    if (map.current || !mapboxToken) return;
     (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().accessToken) = mapboxToken;
     map.current = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_2___default().Map)({
       container: mapContainer.current,
@@ -267,6 +267,9 @@ const Map = props => {
     if (!map.current) return;
     map.current.setStyle(mapboxStyle);
   }, [mapboxStyle]);
+  if (!mapboxToken) {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, __('Mapbox not configured.', 'mapbox-for-wp')));
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "map-container",
     style: {
