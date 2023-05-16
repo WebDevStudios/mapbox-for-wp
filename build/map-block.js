@@ -74,9 +74,9 @@ function edit(_ref) {
     });
   }, [mapAttributes, setAttributes]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Map Options', 'mapbox-for-wordpress')
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Map Options', 'mapbox-for-wp')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Zoom', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Zoom', 'mapbox-for-wp'),
     value: zoom,
     onChange: newZoom => setAttributes({
       zoom: newZoom
@@ -84,7 +84,7 @@ function edit(_ref) {
     min: 0,
     max: 22
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Pitch', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Pitch', 'mapbox-for-wp'),
     value: pitch,
     onChange: newPitch => setAttributes({
       pitch: newPitch
@@ -92,7 +92,7 @@ function edit(_ref) {
     min: 0,
     max: 60
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bearing', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Bearing', 'mapbox-for-wp'),
     value: bearing,
     onChange: newBearing => setAttributes({
       bearing: newBearing
@@ -100,31 +100,31 @@ function edit(_ref) {
     min: 0,
     max: 360
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Longitude', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Longitude', 'mapbox-for-wp'),
     value: longitude,
     onChange: newLongitude => setAttributes({
       longitude: newLongitude
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Latitude', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Latitude', 'mapbox-for-wp'),
     value: latitude,
     onChange: newLatitude => setAttributes({
       latitude: newLatitude
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Style', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Style', 'mapbox-for-wp'),
     value: style,
     onChange: newStyle => setAttributes({
       style: newStyle
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide Controls', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Hide Controls', 'mapbox-for-wp'),
     checked: hideControls,
     onChange: newHideControls => setMapAttributes({
       hideControls: newHideControls
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Static Map', 'mapbox-for-wordpress'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Static Map', 'mapbox-for-wp'),
     checked: staticMap,
     onChange: newStaticMap => setMapAttributes({
       staticMap: newStaticMap

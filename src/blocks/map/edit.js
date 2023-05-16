@@ -46,16 +46,16 @@ export default function edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Map Options', 'mapbox-for-wordpress')}>
+				<PanelBody title={__('Map Options', 'mapbox-for-wp')}>
 					<RangeControl
-						label={__('Zoom', 'mapbox-for-wordpress')}
+						label={__('Zoom', 'mapbox-for-wp')}
 						value={zoom}
 						onChange={(newZoom) => setAttributes({ zoom: newZoom })}
 						min={0}
 						max={22}
 					/>
 					<RangeControl
-						label={__('Pitch', 'mapbox-for-wordpress')}
+						label={__('Pitch', 'mapbox-for-wp')}
 						value={pitch}
 						onChange={(newPitch) =>
 							setAttributes({ pitch: newPitch })
@@ -64,7 +64,7 @@ export default function edit({ attributes, setAttributes }) {
 						max={60}
 					/>
 					<RangeControl
-						label={__('Bearing', 'mapbox-for-wordpress')}
+						label={__('Bearing', 'mapbox-for-wp')}
 						value={bearing}
 						onChange={(newBearing) =>
 							setAttributes({ bearing: newBearing })
@@ -73,28 +73,28 @@ export default function edit({ attributes, setAttributes }) {
 						max={360}
 					/>
 					<TextControl
-						label={__('Longitude', 'mapbox-for-wordpress')}
+						label={__('Longitude', 'mapbox-for-wp')}
 						value={longitude}
 						onChange={(newLongitude) =>
 							setAttributes({ longitude: newLongitude })
 						}
 					/>
 					<TextControl
-						label={__('Latitude', 'mapbox-for-wordpress')}
+						label={__('Latitude', 'mapbox-for-wp')}
 						value={latitude}
 						onChange={(newLatitude) =>
 							setAttributes({ latitude: newLatitude })
 						}
 					/>
 					<TextControl
-						label={__('Style', 'mapbox-for-wordpress')}
+						label={__('Style', 'mapbox-for-wp')}
 						value={style}
 						onChange={(newStyle) =>
 							setAttributes({ style: newStyle })
 						}
 					/>
 					<ToggleControl
-						label={__('Hide Controls', 'mapbox-for-wordpress')}
+						label={__('Hide Controls', 'mapbox-for-wp')}
 						checked={hideControls}
 						onChange={(newHideControls) =>
 							setMapAttributes({
@@ -103,7 +103,7 @@ export default function edit({ attributes, setAttributes }) {
 						}
 					/>
 					<ToggleControl
-						label={__('Static Map', 'mapbox-for-wordpress')}
+						label={__('Static Map', 'mapbox-for-wp')}
 						checked={staticMap}
 						onChange={(newStaticMap) =>
 							setMapAttributes({ staticMap: newStaticMap })
