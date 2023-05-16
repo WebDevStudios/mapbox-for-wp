@@ -8,11 +8,15 @@ License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 6.2
 Requires PHP:      7.4
 
-Display and integrate Mapbox Maps.
+Integrate and display Mapbox Maps.
 
 == Description ==
 
 Display and integrate maps from your [Mapbox](https://www.mapbox.com/) account.
+
+You can make use of default available Mapbox styles or your custom styles to show off maps.
+
+Styles, latitude/longitude, zoom, pitch, and bearing will all be customizable for the block.
 
 == Frequently Asked Questions ==
 
