@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8e9d6f8d4569dc2edb4b335c15b2a92",
+    "content-hash": "75780728ec44d426725c3a3d807da963",
     "packages": [
         {
             "name": "composer/installers",
@@ -928,16 +928,16 @@
         },
         {
             "name": "json-mapper/json-mapper",
-            "version": "2.17.0",
+            "version": "2.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JsonMapper/JsonMapper.git",
-                "reference": "28ae65bdf0647c499265268bc0cdff0a244630ed"
+                "reference": "24144cc22f9eccc3360eb91c85c1a44546fb4ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JsonMapper/JsonMapper/zipball/28ae65bdf0647c499265268bc0cdff0a244630ed",
-                "reference": "28ae65bdf0647c499265268bc0cdff0a244630ed",
+                "url": "https://api.github.com/repos/JsonMapper/JsonMapper/zipball/24144cc22f9eccc3360eb91c85c1a44546fb4ca8",
+                "reference": "24144cc22f9eccc3360eb91c85c1a44546fb4ca8",
                 "shasum": ""
             },
             "require": {
@@ -993,7 +993,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-02T19:30:20+00:00"
+            "time": "2023-05-12T16:49:57+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1780,16 +1780,16 @@
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/jsonlint.git",
-                "reference": "4211420d25eba80712bff236a98960ef68b866b7"
+                "reference": "594fd6462aad8ecee0b45ca5045acea4776667f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/4211420d25eba80712bff236a98960ef68b866b7",
-                "reference": "4211420d25eba80712bff236a98960ef68b866b7",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/594fd6462aad8ecee0b45ca5045acea4776667f1",
+                "reference": "594fd6462aad8ecee0b45ca5045acea4776667f1",
                 "shasum": ""
             },
             "require": {
@@ -1828,7 +1828,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/jsonlint/issues",
-                "source": "https://github.com/Seldaek/jsonlint/tree/1.9.0"
+                "source": "https://github.com/Seldaek/jsonlint/tree/1.10.0"
             },
             "funding": [
                 {
@@ -1840,7 +1840,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-01T13:37:23+00:00"
+            "time": "2023-05-11T13:16:46+00:00"
         },
         {
             "name": "seld/phar-utils",

@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by WebDevStudios on 04-May-2023 using Strauss.
+ * Modified by WebDevStudios on 16-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
