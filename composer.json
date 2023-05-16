@@ -40,12 +40,8 @@
 	"scripts": {
 		"lint": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --standard=phpcs.xml --extensions=php .",
 		"lint:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=phpcs.xml --extensions=php .",
-		"post-install-cmd": [
-			"@php ./vendor/bin/strauss"
-		],
-		"post-update-cmd": [
-			"@php ./vendor/bin/strauss"
-		]
+		"post-install-cmd": [],
+		"post-update-cmd": []
 	},
 	"config": {
 		"platform": {
