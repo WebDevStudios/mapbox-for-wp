@@ -1,7 +1,7 @@
 {
 	"name": "mapbox-for-wp",
 	"version": "0.1.0",
-	"description": "Integrate your maps from Mapbox in to WordPress.",
+	"description": "Integrate your maps from Mapbox into WordPress.",
 	"author": "Pluginize",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
@@ -14,7 +14,15 @@
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start"
 	},
+	"dependencies": {
+		"mapbox-gl": "^2.14.0",
+		"react": "^18.2.0"
+	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.1.0"
+		"@wordpress/prettier-config": "^2.15.0",
+		"@wordpress/scripts": "^26.1.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"prettier": "^2.8.8"
 	}
 }

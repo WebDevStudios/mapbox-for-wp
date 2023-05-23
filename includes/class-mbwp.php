@@ -1,4 +1,10 @@
 <?php
+/**
+ * Main class file.
+ *
+ * @package WebDevStudios\MBWP
+ * @since   1.0.0
+ */
 
 namespace WebDevStudios\MBWP;
 
@@ -16,7 +22,7 @@ final class MBWP {
 	 *
 	 * @var Settings
 	 */
-	private $settings;
+	private Settings $settings;
 
 	/**
 	 * Executes our hooks to wire everything up.

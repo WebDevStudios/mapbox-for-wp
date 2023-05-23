@@ -7,14 +7,19 @@
 
 namespace WebDevStudios\MBWP;
 
+/**
+ * MBWP_Factory class
+ *
+ * @since 1.0.0
+ */
 class MBWP_Factory {
 
 	/**
-	 * Create and return a shared instance of the MBWP
-	 * .
+	 * Create and return a shared instance of the MBWP.
+	 *
+	 * @since 1.0.0
+	 *
 	 * @return MBWP The shared plugin instance.
-	 * @since  1.0.0
-	 * @author WebDevStudios <contact@webdevstudios.com>
 	 */
 	public static function create(): MBWP {
 

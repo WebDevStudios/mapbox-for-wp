@@ -13,19 +13,15 @@
 	"keywords": [],
 	"type": "wordpress-plugin",
 	"require": {
-		"webdevstudios/edd-sl-plugin-updater": "1.9.1"
+		"php": ">=7.2",
+		"composer/installers": "~1.0"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1",
-		"wp-coding-standards/wpcs": "^2.3"
+		"wp-coding-standards/wpcs": "^2.3",
+		"brianhenryie/strauss": "^0.11.1"
 	},
-	"repositories": [
-		{
-			"type": "git",
-			"url": "https://github.com/WebDevStudios/EDD_SL_Plugin_Updater.git"
-		}
-	],
 	"extra": {
 		"strauss": {
 			"target_directory": "vendor_prefixed",
@@ -41,12 +37,19 @@
 			"includes/"
 		]
 	},
+	"scripts": {
+		"lint": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --standard=phpcs.xml --extensions=php .",
+		"lint:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=phpcs.xml --extensions=php .",
+		"post-install-cmd": [],
+		"post-update-cmd": []
+	},
 	"config": {
 		"platform": {
 			"php": "7.4"
 		},
 		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true
 		}
 	}
 }
