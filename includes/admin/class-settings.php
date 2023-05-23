@@ -225,10 +225,23 @@ class Settings {
 	public function settings_callback() {
 		?>
 			<p>
+				<?php
+				printf(
+				// translators: Placeholder is for html link after escaping.
+					esc_html__( 'API information can be found at %s', 'mapbox-for-wp' ),
+					sprintf(
+						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
+						esc_url( 'https://account.mapbox.com/access-tokens/' ),
+						esc_html__( 'Mapbox API Access Tokens', 'mapbox-for-wp' )
+					)
+				);
+				?>
+			</p>
+			<p>
 			<?php
 				printf(
 					// translators: Placeholder is for html link after escaping.
-					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
+					esc_html__( 'Styles information can be found at %s', 'mapbox-for-wp' ),
 					sprintf(
 						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
 						esc_url( 'https://docs.mapbox.com/api/maps/styles/' ),
