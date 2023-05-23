@@ -179,11 +179,11 @@ const {
     },
     latitude: {
       type: 'number',
-      default: 0
+      default: 1
     },
     zoom: {
       type: 'number',
-      default: 0
+      default: 1
     },
     pitch: {
       type: 'number',
