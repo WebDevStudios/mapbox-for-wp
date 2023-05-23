@@ -8,7 +8,7 @@
 
 /**
  * Plugin Name:       Mapbox For WP
- * Description:       Integrate your maps from Mapbox in to WordPress.
+ * Description:       Integrate your maps from Mapbox into WordPress.
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Version:           1.0.0
