@@ -1,7 +1,7 @@
 === Mapbox For WP ===
 Contributors:      WebDevStudios, williamsba1, tw2113, scottbasgaard
 Tags:              mapbox, block, map, maps, embed, interactive map
-Tested up to:      6.2
+Tested up to:      6.2.2
 Stable tag:        1.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
