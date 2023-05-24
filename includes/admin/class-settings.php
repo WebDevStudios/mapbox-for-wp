@@ -228,13 +228,23 @@ class Settings {
 			<?php
 				printf(
 					// translators: Placeholder is for html link after escaping.
-					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
+					esc_html__( 'Visit the %s to retrieve your public token. ', 'mapbox-for-wp' ),
+					sprintf(
+						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
+						esc_url( 'https://account.mapbox.com/access-tokens/' ),
+						esc_html__( 'Mapbox dashboard', 'mapbox-for-wp' )
+					)
+				);
+				printf(
+					// translators: Placeholder is for html link after escaping.
+					esc_html__( 'Additional information can be found at %s', 'mapbox-for-wp' ),
 					sprintf(
 						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
 						esc_url( 'https://docs.mapbox.com/api/maps/styles/' ),
 						esc_html__( 'Mapbox Styles API', 'mapbox-for-wp' )
 					)
 				);
+
 			?>
 			</p>
 		<?php
