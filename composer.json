@@ -1,0 +1,55 @@
+{
+	"name": "webdevstudios/mapbox-for-wp",
+	"version": "1.0.0",
+	"description": "Integrate and display Mapbox Maps.",
+	"authors": [
+		{
+			"name": "WebDevStudios",
+			"email": "contact@webdevstudios.com"
+		}
+	],
+	"homepage": "https://pluginize.com/",
+	"license": "GPL-2.0-or-later",
+	"keywords": [],
+	"type": "wordpress-plugin",
+	"require": {
+		"php": ">=7.4",
+		"composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"wp-coding-standards/wpcs": "^2.3",
+		"brianhenryie/strauss": "^0.11.1"
+	},
+	"extra": {
+		"strauss": {
+			"target_directory": "vendor_prefixed",
+			"namespace_prefix": "WebDevStudios\\MBWP\\",
+			"classmap_prefix": "MBWP_",
+			"constant_prefix": "MBWP_",
+			"namespace_replacement_patterns": {},
+			"delete_vendor_files": false
+		}
+	},
+	"autoload": {
+		"classmap": [
+			"includes/"
+		]
+	},
+	"scripts": {
+		"lint": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --standard=phpcs.xml --extensions=php .",
+		"lint:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=phpcs.xml --extensions=php .",
+		"post-install-cmd": [],
+		"post-update-cmd": []
+	},
+	"config": {
+		"platform": {
+			"php": "7.4"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true
+		}
+	}
+}
