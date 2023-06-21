@@ -228,13 +228,23 @@ class Settings {
 			<?php
 				printf(
 					// translators: Placeholder is for html link after escaping.
-					esc_html__( 'Information can be found at %s', 'mapbox-for-wp' ),
+					esc_html__( 'Visit the %s to retrieve your public token. ', 'mapbox-for-wp' ),
+					sprintf(
+						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
+						esc_url( 'https://account.mapbox.com/access-tokens/' ),
+						esc_html__( 'Mapbox dashboard', 'mapbox-for-wp' )
+					)
+				);
+				printf(
+					// translators: Placeholder is for html link after escaping.
+					esc_html__( 'Additional information can be found at %s', 'mapbox-for-wp' ),
 					sprintf(
 						'<a href="%s" target="_blank" rel="noopener">%s<span style="font-size: 16px;" class="dashicons dashicons-external"></span></a>',
 						esc_url( 'https://docs.mapbox.com/api/maps/styles/' ),
 						esc_html__( 'Mapbox Styles API', 'mapbox-for-wp' )
 					)
 				);
+
 			?>
 			</p>
 		<?php
@@ -258,14 +268,14 @@ class Settings {
 	 */
 	private function get_styles(): array {
 		$options = [
-			'mapbox://styles/mapbox/streets-v12'           => 'Mapbox Streets',
-			'mapbox://styles/mapbox/outdoors-v12'          => 'Mapbox Outdoors',
-			'mapbox://styles/mapbox/light-v11'             => 'Mapbox Light',
-			'mapbox://styles/mapbox/dark-v11'              => 'Mapbox Dark',
-			'mapbox://styles/mapbox/satellite-v9'          => 'Mapbox Satellite',
-			'mapbox://styles/mapbox/satellite-streets-v12' => 'Mapbox Satellite Streets',
-			'mapbox://styles/mapbox/navigation-day-v1'     => 'Mapbox Navigation Day',
-			'mapbox://styles/mapbox/navigation-night-v1'   => 'Mapbox Navigation Night',
+			'mapbox://styles/mapbox/streets-v12'           => esc_html__( 'Mapbox Streets', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/outdoors-v12'          => esc_html__( 'Mapbox Outdoors', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/light-v11'             => esc_html__( 'Mapbox Light', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/dark-v11'              => esc_html__( 'Mapbox Dark', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/satellite-v9'          => esc_html__( 'Mapbox Satellite', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/satellite-streets-v12' => esc_html__( 'Mapbox Satellite Streets', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/navigation-day-v1'     => esc_html__( 'Mapbox Navigation Day', 'mapbox-for-wp' ),
+			'mapbox://styles/mapbox/navigation-night-v1'   => esc_html__( 'Mapbox Navigation Night', 'mapbox-for-wp' ),
 		];
 		return (array) apply_filters( 'mbwp_styles_options', $options );
 	}

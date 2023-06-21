@@ -1,7 +1,7 @@
 {
 	"name": "webdevstudios/mapbox-for-wp",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Integrate and display Mapbox Maps.",
 	"authors": [
 		{
 			"name": "WebDevStudios",
@@ -13,7 +13,7 @@
 	"keywords": [],
 	"type": "wordpress-plugin",
 	"require": {
-		"php": ">=7.2",
+		"php": ">=7.4",
 		"composer/installers": "~1.0"
 	},
 	"require-dev": {
