@@ -70,6 +70,7 @@ class Settings {
 	public function do_hooks() {
 		add_action( 'admin_menu', [ $this, 'add_page' ] );
 		add_action( 'admin_init', [ $this, 'add_settings' ] );
+		add_action( 'admin_notices', [ $this, 'settings_saved' ] );
 	}
 
 	/**
@@ -278,5 +279,29 @@ class Settings {
 			'mapbox://styles/mapbox/navigation-night-v1'   => esc_html__( 'Mapbox Navigation Night', 'mapbox-for-wp' ),
 		];
 		return (array) apply_filters( 'mbwp_styles_options', $options );
+	}
+
+	/**
+	 * Saved settings admin notice.
+	 *
+	 * @since 1.0.1
+	 */
+	public function settings_saved() {
+		if ( empty( $_REQUEST ) ) {
+			return;
+		}
+
+		if (
+			isset( $_REQUEST['page'] ) &&
+			'mapbox-for-wp' === $_REQUEST['page'] &&
+			isset( $_REQUEST['settings-updated'] ) &&
+			'true' === $_REQUEST['settings-updated']
+		) {
+			?>
+			<div id="mapbox-for-wp-settings-saved" class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Settings saved', 'mapbox-for-wp' ); ?></p>
+			</div>
+		<?php
+		}
 	}
 }
